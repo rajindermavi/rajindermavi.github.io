@@ -3,4 +3,4 @@ title: "Rajinder Mavi, PhD"
 #image: construction.png
 ---
 
-![](construction.png){ .header-image}
+![Under Construction](construction.png){ .header-image}
