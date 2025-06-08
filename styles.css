@@ -1,0 +1,10 @@
+/* css styles */
+.header-image {
+  max-width: 100%;       /* Resize relative to container */
+  height: auto;          /* Maintain aspect ratio */
+  display: block;
+  margin: 0 auto;        /* Center horizontally */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  object-fit: contain;   /* Optional for scaling inside fixed box */
+}

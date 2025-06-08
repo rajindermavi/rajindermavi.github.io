@@ -1,0 +1,99 @@
+---
+title: "LinkedIn Messaging Feature Proposal"
+#author: "Rajinder Mavi"
+date: "2025-05-30"
+categories: [Data Science]
+image: "LinkedInGraph.png"
+draft: true
+---
+
+![](LinkedInGraph.png){ .header-image width=25% }
+
+
+Let's talk about A/B testing.
+
+Specifically, we'll consider an enhancement to their messaging service. Check out [this proposal by Dan Vang](https://www.danvang.com/linkedin/). 
+
+![Mockup illustrating the flow of interactions leading to the new feature. (Credit: Dan Vang. Used by permission.)](LinkedinAddHistory.png)
+
+Essentially, the idea is to insert a field where a user can privately add a short blurb <!---(in the messaging window)---> summarizing how they connected with another user.
+
+## LinkedIn's Process
+
+Typically rolling out a new feature on any social networking site requires collecting metrics to demonstrate it's impact and utility for users. In this article we will run through this vetting process.
+
+
+LinkedIn has a robust A/B testing methodology developed over years as the world's leading professional networking site. This [2015 article](https://content.linkedin.com/content/dam/engineering/site-assets/pdfs/ABTestingSocialNetwork_share.pdf) details early scaling solutions. And [this](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i) [pair](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment) of 2020 articles lays out their mature infrastructure and methodology for A/B testing, called LinkedIn Targeting, Ramping, and Experimentation platform, or T-REX. All this preparation yields impressive scaling capabilities, supporting 2,000 new experiments per week.
+
+## Testing Considerations
+
+Primarily we would like to know if our feature provides a better experience and encourages users to engage more with the site. Let's examine this more closely.
+
+### Timeline
+
+We should include a reasonable burn-in period for a novel feature such as this.
+
+Typical A/B testing cycles run on a timeline of a minimum of 2 weeks to a maximum of 6 - 8 weeks. 
+
+Ideally we would like to know the impact over a longer timeline. However, for business and experimental control reasons we would like to conclude on a quicker timeline, thus we can use adoption as a proxy on the assumption that memory aids will improve engagements between loosely connected members.
+
+### Multiple Testing
+
+* First Order
+    + Utilization
+        - Adoption. Frequency. Retention.
+        - Do users interact with the tool? How often? Consistently over the course of the trial?
+    + Direct Messages
+        - Does the feature lead to higher DM rates between users?
+* Second Order
+    + Visiting Profiles
+* Third Order
+    + Engagement
+
+### Segmenting
+Considering the user base of LinkedIn, we would like to break down users into several categories. 
+
+* Job Seekers/Professionals
+* Recruiters
+* Influencers
+* Sales & Marketing Specialists
+* NGO/Nonprofit Workers
+* Entrepreneurs/Startups
+* Corporate Managers
+
+As this enhancement relates to messaging, I would prefer to select A and B groups composed of well 
+
+ On top of these segments
+
+### Conflicts
+
+* Although LinkedIn allows for overlapping experiments, we would like to avoid intersecting with other experiments on messaging to avoid confounding factors.
+* Disjoint:
+    + Messaging app properties: look and feel, fields layout, button placement
+* Independent:
+    + Message notifications, alerts, etc
+* Changing browser types. Every effort should be made to maintain a smooth operating experience between different browsers, however, users switching browsers could be a complicating factor. It could also provide valuable information on which formats provide the best outcomes.
+
+## KPIs and Statistics
+
+Now time for the fun stuff.
+
+There are many possible KPIs we could utilize for the above aspects we would like to measure. For the sake of simplicity, we will suggest one KPI for each of the above.
+
+### KPIs
+
+#### First Order KPIs:
+
+Adoption Rate:
+$$
+A = \frac{\text{# users who used the feature at least once}}{\text{# users exposed to the feature}} 
+$$
+
+Frequency:
+As use of the feature is dependent on entering the messaging window, an opportunity would be defined as entering a messaging window where the summary is not yet filled in.
+$$
+F = \frac{\text{# times feature is used.}}{\text{# Opportunities to use the feature.}}
+$$
+
+Retention:
+For simplicity here let's focus on retention over a fixed time period. 

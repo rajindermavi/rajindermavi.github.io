@@ -1,0 +1,44 @@
+{
+  "posts/welcome/index.qmd": {
+    "index.html": "b24f130e"
+  },
+  "posts/post-with-code/index.qmd": {
+    "index.html": "b5b65488"
+  },
+  "index.qmd": {
+    "index.html": "9c35d6af"
+  },
+  "about.qmd": {
+    "about.html": "125732d3"
+  },
+  "portfolio/post-with-code/index.qmd": {
+    "index.html": "dafb5966"
+  },
+  "portfolio/welcome/index.qmd": {
+    "index.html": "45b05dc7"
+  },
+  "portfolio.qmd": {
+    "portfolio.html": "4efacbae"
+  },
+  "portfolio/post-with-image/index.qmd": {
+    "index.html": "90404afa"
+  },
+  "portfolio/hofstadter-butterfly/index.qmd": {
+    "index.html": "3fc1ee67"
+  },
+  "portfolio/linkedin-messaging-feature/index.qmd": {
+    "index.html": "59f78c4f"
+  },
+  "blog.qmd": {
+    "blog.html": "ed74e6d4"
+  },
+  "blog/linkedin-messaging-feature/index.qmd": {
+    "index.html": "5fac9cb9"
+  },
+  "blog/welcome/index.qmd": {
+    "index.html": "23fca43c"
+  },
+  "blog/hofstadter-butterfly/index.qmd": {
+    "index.html": "e390711e"
+  }
+}

@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Mavi, PhD"
+  navbar:
+    left:
+      - href: blog.qmd
+        text: Blog
+    right:
+      - about.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/rajinder-mavi/
+      - icon: github
+        href: https://github.com/rajindermavi
+      #- icon: twitter
+      #  href: https://twitter.com
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+
+execute:
+  freeze: auto
+

@@ -1,0 +1,10 @@
+---
+title: "Welcome To My Portfolio"
+# author: "Tristan O'Malley"
+date: "2025-05-26"
+categories: [News]
+---
+
+This is the first article in my portfolio. Welcome!
+
+![](thumbnail.jpg)

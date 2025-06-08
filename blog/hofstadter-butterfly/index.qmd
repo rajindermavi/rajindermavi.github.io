@@ -1,0 +1,13 @@
+---
+title: "Douglas Hofstadter's genius"
+#author: "Harlow Malloc"
+date: "2025-05-29"
+categories: [Applied Math]
+image: "HofstadterButterfly.png"
+draft: true
+---
+
+Lets talk about this amazing image.
+
+
+![](HofstadterButterfly.png)
