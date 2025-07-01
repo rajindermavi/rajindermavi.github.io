@@ -50,7 +50,9 @@ Ideally we would like to know the impact over a longer timeline. However, for bu
 * Third Order
     + Engagement
 
-### Segmenting
+### Clustering and Segmenting
+
+
 Considering the user base of LinkedIn, we would like to break down users into several categories. 
 
 * Job Seekers/Professionals
@@ -60,6 +62,8 @@ Considering the user base of LinkedIn, we would like to break down users into se
 * NGO/Nonprofit Workers
 * Entrepreneurs/Startups
 * Corporate Managers
+
+As these segments are likely 
 
 As this enhancement relates to messaging, I would prefer to select A and B groups composed of well 
 
@@ -97,3 +101,7 @@ $$
 
 Retention:
 For simplicity here let's focus on retention over a fixed time period. 
+
+### Statistics
+
+Breaking the stable unit treatment value assumption. (Eckles, D., Karrer, B., & Ugander, J. (2017). Design and analysis of experiments in networks: Reducing bias from interference. Journal of Causal Inference.)
