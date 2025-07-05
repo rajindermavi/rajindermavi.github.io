@@ -5,6 +5,7 @@ date: "2025-05-30"
 categories: [Data Science]
 image: "LinkedInGraph.png"
 draft: true
+bibliography: references.bib
 ---
 
 ![](LinkedInGraph.png){ .header-image width=25% }
@@ -51,6 +52,18 @@ Ideally we would like to know the impact over a longer timeline. However, for bu
     + Engagement
 
 ### Clustering and Segmenting
+
+* Determine average effect of treatment $\tau$
+* Partition by clusters following Ugander et al. to estimate $\tau$ with an unbiased estimator.
+
+We follow the methodology for partitioning users by clusters rather than by individuals [see @UganderEtAl_2013_A].
+We conrol the effect of interference [see @EcklesKarrerUgander_2017]
+
+* Model the social network as a graph, and determine how edges should be formed.
+* Introduce (heterogeneous) k-core of graph.
+* Define exposure with respect to k-core.
+* Horowitz - Thompson estimator for unbiased estimator of tau. Variant with clustering.
+
 
 
 Considering the user base of LinkedIn, we would like to break down users into several categories. 
@@ -103,5 +116,3 @@ Retention:
 For simplicity here let's focus on retention over a fixed time period. 
 
 ### Statistics
-
-Breaking the stable unit treatment value assumption. (Eckles, D., Karrer, B., & Ugander, J. (2017). Design and analysis of experiments in networks: Reducing bias from interference. Journal of Causal Inference.)
