@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "blog/welcome/index.html",
+    "href": "blog/welcome/index.html",
+    "title": "Welcome To My Portfolio",
+    "section": "",
+    "text": "This is the first article in my portfolio. Welcome!"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Mavi, PhD",
@@ -12,13 +19,6 @@
     "title": "Rajinder Mavi, PhD",
     "section": "",
     "text": "Welcome!\n\n\n\nUnder Construction"
-  },
-  {
-    "objectID": "blog/welcome/index.html",
-    "href": "blog/welcome/index.html",
-    "title": "Welcome To My Portfolio",
-    "section": "",
-    "text": "This is the first article in my portfolio. Welcome!"
   },
   {
     "objectID": "about.html",
