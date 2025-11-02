@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://rajindermavi.github.io/blog/welcome/index.html</loc>
-    <lastmod>2025-11-02T02:05:06.774Z</lastmod>
-  </url>
-  <url>
-    <loc>https://rajindermavi.github.io/blog.html</loc>
-    <lastmod>2025-11-02T02:05:06.769Z</lastmod>
+    <loc>https://rajindermavi.github.io/about.html</loc>
+    <lastmod>2025-06-08T22:02:15.281Z</lastmod>
   </url>
   <url>
     <loc>https://rajindermavi.github.io/index.html</loc>
-    <lastmod>2025-11-02T02:05:06.781Z</lastmod>
+    <lastmod>2025-06-08T22:02:16.291Z</lastmod>
   </url>
   <url>
-    <loc>https://rajindermavi.github.io/about.html</loc>
-    <lastmod>2025-11-02T02:05:06.769Z</lastmod>
+    <loc>https://rajindermavi.github.io/blog/welcome/index.html</loc>
+    <lastmod>2025-11-02T02:12:06.622Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rajindermavi.github.io/blog.html</loc>
+    <lastmod>2025-06-08T22:02:15.281Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rajindermavi.github.io/portfolio/welcome/index.html</loc>
+    <lastmod>2025-11-02T02:11:41.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://rajindermavi.github.io/portfolio.html</loc>
+    <lastmod>2025-11-02T02:06:53.213Z</lastmod>
   </url>
 </urlset>
