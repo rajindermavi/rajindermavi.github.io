@@ -1,10 +1,10 @@
 ---
-title: "Welcome To My Blog"
+title: "Welcome To My Portfolio"
 # author: "Rajinder Mavi"
 date: "2025-11-01"
 categories: [News]
 ---
 
-This is the first article in my blog. Welcome!
+This is the first article in my portfolio. Welcome!
 
 ![](thumbnail.jpg)

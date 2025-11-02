@@ -7,24 +7,38 @@
     "text": "About this site …"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Mavi, PhD",
-    "section": "",
-    "text": "Welcome To My Portfolio\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nMay 26, 2025\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/welcome/index.html",
-    "href": "blog/welcome/index.html",
-    "title": "Welcome To My Portfolio",
-    "section": "",
-    "text": "This is the first article in my portfolio. Welcome!"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Rajinder Mavi, PhD",
     "section": "",
     "text": "Welcome!\n\n\n\nUnder Construction"
+  },
+  {
+    "objectID": "blog/welcome/index.html",
+    "href": "blog/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first article in my blog. Welcome!"
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Mavi, PhD",
+    "section": "",
+    "text": "Welcome To My Blog\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "portfolio/welcome/index.html",
+    "href": "portfolio/welcome/index.html",
+    "title": "Welcome To My Portfolio",
+    "section": "",
+    "text": "This is the first article in my portfolio. Welcome!"
+  },
+  {
+    "objectID": "portfolio.html",
+    "href": "portfolio.html",
+    "title": "Mavi, PhD",
+    "section": "",
+    "text": "Welcome To My Portfolio\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
   }
 ]

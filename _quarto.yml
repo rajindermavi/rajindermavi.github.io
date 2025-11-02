@@ -6,6 +6,8 @@ website:
   title: "Mavi, PhD"
   navbar:
     left:
+      - href: portfolio.qmd
+        text: Portfolio
       - href: blog.qmd
         text: Blog
     right:
