@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "portfolio/welcome/index.html",
+    "href": "portfolio/welcome/index.html",
+    "title": "Welcome To My Portfolio",
     "section": "",
-    "text": "About this site …"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Rajinder Mavi, PhD",
-    "section": "",
-    "text": "Welcome!\n\n\n\nUnder Construction"
+    "text": "This is the first article in my portfolio. Welcome!"
   },
   {
     "objectID": "blog/welcome/index.html",
@@ -21,6 +14,13 @@
     "text": "This is the first article in my blog. Welcome!"
   },
   {
+    "objectID": "portfolio.html",
+    "href": "portfolio.html",
+    "title": "Mavi, PhD",
+    "section": "",
+    "text": "Welcome To My Portfolio\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Mavi, PhD",
@@ -28,17 +28,17 @@
     "text": "Welcome To My Blog\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "portfolio/welcome/index.html",
-    "href": "portfolio/welcome/index.html",
-    "title": "Welcome To My Portfolio",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Rajinder Mavi, PhD",
     "section": "",
-    "text": "This is the first article in my portfolio. Welcome!"
+    "text": "Welcome!\n\n\n\nUnder Construction"
   },
   {
-    "objectID": "portfolio.html",
-    "href": "portfolio.html",
-    "title": "Mavi, PhD",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Welcome To My Portfolio\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
+    "text": "About this site …"
   }
 ]
