@@ -1,11 +1,10 @@
 ---
 title: "LinkedIn Messaging Feature Proposal"
 #author: "Rajinder Mavi"
-date: "2025-05-30"
+date: "2025-06-15"
 categories: [Data Science]
 image: "LinkedInGraph.png"
 draft: true
-bibliography: references.bib
 ---
 
 ![](LinkedInGraph.png){ .header-image width=25% }
@@ -13,11 +12,11 @@ bibliography: references.bib
 
 Let's talk about A/B testing.
 
-Specifically, we'll consider an enhancement to their messaging service. Check out [this proposal by Dan Vang](https://www.danvang.com/linkedin/). 
+Specifically, we'll consider an enhancement to their direct messaging service. Check out [this proposal by Dan Vang](https://www.danvang.com/linkedin/). 
 
 ![Mockup illustrating the flow of interactions leading to the new feature. (Credit: Dan Vang. Used by permission.)](LinkedinAddHistory.png)
 
-Essentially, the idea is to insert a field where a user can privately add a short blurb <!---(in the messaging window)---> summarizing how they connected with another user.
+Essentially, the idea is to insert a field where a user can privately add a short blurb <!---(in the messaging window)---> to contextualize their connection to another user.
 
 ## LinkedIn's Process
 
@@ -28,43 +27,11 @@ LinkedIn has a robust A/B testing methodology developed over years as the world'
 
 ## Testing Considerations
 
-Primarily we would like to know if our feature provides a better experience and encourages users to engage more with the site. Let's examine this more closely.
+There are a number of considerations to address when designing a test. We'll break them down into user segmentation and clustering, test conflicts, and timeline.
 
-### Timeline
+### Clustering and Segmentation
 
-We should include a reasonable burn-in period for a novel feature such as this.
-
-Typical A/B testing cycles run on a timeline of a minimum of 2 weeks to a maximum of 6 - 8 weeks. 
-
-Ideally we would like to know the impact over a longer timeline. However, for business and experimental control reasons we would like to conclude on a quicker timeline, thus we can use adoption as a proxy on the assumption that memory aids will improve engagements between loosely connected members.
-
-### Multiple Testing
-
-* First Order
-    + Utilization
-        - Adoption. Frequency. Retention.
-        - Do users interact with the tool? How often? Consistently over the course of the trial?
-    + Direct Messages
-        - Does the feature lead to higher DM rates between users?
-* Second Order
-    + Visiting Profiles
-* Third Order
-    + Engagement
-
-### Clustering and Segmenting
-
-* Determine average effect of treatment $\tau$
-* Partition by clusters following Ugander et al. to estimate $\tau$ with an unbiased estimator.
-
-We follow the methodology for partitioning users by clusters rather than by individuals [see @UganderEtAl_2013_A].
-We conrol the effect of interference [see @EcklesKarrerUgander_2017]
-
-* Model the social network as a graph, and determine how edges should be formed.
-* Introduce (heterogeneous) k-core of graph.
-* Define exposure with respect to k-core.
-* Horowitz - Thompson estimator for unbiased estimator of tau. Variant with clustering.
-
-
+Since our feature relates to user interactions, it would be wise to consider user clusters as the unit users would be randomized by and assigned treatment groups. This strategy is designed to limit the event of spillover from one treatment group to another. With this approach we must be careful in our estimation of parameters as user selection into treatment groups is affected. Users placed in treatment groups remains a random variable with the same probability distribution, but those random variables are no longer independent of each other.
 
 Considering the user base of LinkedIn, we would like to break down users into several categories. 
 
@@ -76,8 +43,6 @@ Considering the user base of LinkedIn, we would like to break down users into se
 * Entrepreneurs/Startups
 * Corporate Managers
 
-As these segments are likely 
-
 As this enhancement relates to messaging, I would prefer to select A and B groups composed of well 
 
  On top of these segments
@@ -86,33 +51,62 @@ As this enhancement relates to messaging, I would prefer to select A and B group
 
 * Although LinkedIn allows for overlapping experiments, we would like to avoid intersecting with other experiments on messaging to avoid confounding factors.
 * Disjoint:
-    + Messaging app properties: look and feel, fields layout, button placement
+    + Direct Messaging Service attributes. EG: DM notifications, look and feel updates, LinkedIn inmail sponsored messages.
 * Independent:
-    + Message notifications, alerts, etc
+    + Non Direct Messaging Service features. Other notifications, feed updates, etc.
 * Changing browser types. Every effort should be made to maintain a smooth operating experience between different browsers, however, users switching browsers could be a complicating factor. It could also provide valuable information on which formats provide the best outcomes.
+
+### Timeline
+
+We should include a reasonable burn-in period for a novel feature such as this.
+
+Typical A/B testing cycles run on a timeline of a minimum of 2 weeks to a maximum of 6 - 8 weeks. We will assume a round 8 weeks.
+
+Ideally we would like to know the impact over a longer timeline. However, for business and experimental control reasons we would like to conclude on a quicker timeline, thus we can use adoption as a proxy on the assumption that memory aids will improve engagements between loosely connected members.
+
+
 
 ## KPIs and Statistics
 
 Now time for the fun stuff.
 
-There are many possible KPIs we could utilize for the above aspects we would like to measure. For the sake of simplicity, we will suggest one KPI for each of the above.
+There are many possible KPIs we could utilize for the above aspects we would like to measure. For ease of exposition, we will suggest simple KPIs for each of the above.
 
-### KPIs
+#### Utilization KPIs
 
-#### First Order KPIs:
 
-Adoption Rate:
+* Adoption.
+    - Tracking users who use the feature when it becomes available to them, a higher adoption rate suggests more users find it relevant.
+
 $$
-A = \frac{\text{# users who used the feature at least once}}{\text{# users exposed to the feature}} 
+A = \frac{\#\text{users who used the feature at least once}}{\#\text{users exposed to the feature}}
 $$
-
-Frequency:
+* Frequency.
+    - Measure total number of uses over the course of the trial. Higher frequency of use implies each user finds value in the feature over many connections.
 As use of the feature is dependent on entering the messaging window, an opportunity would be defined as entering a messaging window where the summary is not yet filled in.
 $$
-F = \frac{\text{# times feature is used.}}{\text{# Opportunities to use the feature.}}
+F = \frac{\#\text{ times feature is used.}}{\#\text{opportunities to use the feature.}}
 $$
 
-Retention:
-For simplicity here let's focus on retention over a fixed time period. 
 
-### Statistics
+* Retention.
+    - Check that users return to the feature over a specified time span. This indicates the user found value for the feature in the past and creates a stickier environment for the user. 
+As we will observe just over the course of several weeks, we will test with a 7 day retention window.
+$$
+R = \frac{\#\text{users who used the feature 7 days after their first use.}}{\#\text{users who used the feature.}}
+$$
+
+
+#### A/B testing KPIs:
+
+* Direct Messages
+    - As our feature lives in the direct message service, this would be the primary effect we would like to investigate.
+    $$
+    M = \frac{\#\text{Direct Messages}}{\#\text{Users with context.}}
+    $$
+* Engagement
+    - A secondary effect of providing context to peers is a change in engagement, measured in likes, comments, and shares.
+    $$
+    E = \frac{\#\text{Likes + Comments + Shares}}{\#\text{Impressions}}
+    $$
+
