@@ -1,9 +1,17 @@
 ---
-title: "Graph Cluster Randomization"
+title: "Causal Inference With Interference"
 #author: "Rajinder Mavi"
 date: "2025-12-01"
-categories: [AB Testing, Data Science]
+categories: [AB Testing, Data Science, Statistics, Academic]
 image: "../../construction.png"
 draft: true
 ---
+
+* Estimators
+
+{{< include ../../includes/estimator.qmd >}}
+
+* Horvitz Thompson Estimator
+
+{{< include ../../includes/estimator_HT.qmd >}}
 

@@ -1,0 +1,53 @@
+
+In the language of statistics, an esimator is a formula or rule 
+employed to estimate a quantity of interest based on observed data. 
+An estimator is said to be unbiased if it's expectation is equal to the quantity of interest.
+
+Familiar examples include the Expectation and Variance estimators 
+for a set of observations $(X_1,..,X_n)$ of a random variable $X$ 
+with mean $\mu$ and variance $\sigma^2$. 
+
+
+* Expectation
+
+$$
+\bar X_n = \frac{1}{n} \sum_{i=1}^n X_i
+$$
+The estimator is unbiased since
+$$
+\mathbb{E} [\bar X_n] = \mu
+$$
+
+It is useful to find (or at least bound above) the variance of the estimator, 
+since that guarantees a good estimate if it can be shown to be small. 
+The variance is 
+$$
+Var(\bar X_n)  = \mathbb{E}[(\bar X_n - \mathbb{E}[\bar_n])^2] = \frac{1}{n}\sigma^2
+$$
+so the variance tends to zero with a large sample, 
+assuring a quality estimator that is unbiased and converges to the quantity of interest.
+
+* Variance
+
+$$
+S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X_n)^2
+$$
+$$
+\mathbb{E} [S_n^2] = \sigma^2
+$$
+
+The variance is somewhat more complicated,
+$$
+Var(S^2_n) = \frac1n \left( \mathbb{E}[(X - \mu)^4] -\frac{n-3}{n-1}\sigma^4 \right)
+$$
+nevertheless still tends to zero with a large sample.
+
+Note we did not use the estimator
+$$
+\tilde S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X_n)^2
+$$
+as this woule have expectation 
+$$
+\mathbb{E} [\tilde S_n^2] = \frac{n}{n-1}\sigma^2
+$$
+and would be a biased estimator. 
