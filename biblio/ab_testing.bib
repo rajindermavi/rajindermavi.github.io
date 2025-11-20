@@ -1,0 +1,124 @@
+
+# PREPRINTS
+@misc{bhadra2025causal,
+      title={Causal Inference Under Network Interference}, 
+      author={Subhankar Bhadra and Michael Schweinberger},
+      year={2025},
+      eprint={2508.06808},
+      archivePrefix={arXiv},
+      primaryClass={stat.ME},
+      url={https://arxiv.org/abs/2508.06808}, 
+}
+
+
+# WEB SOURCES
+
+
+
+@misc{LinkedInTRexI,
+  author = {Ivaniuk, Alexander and Duan, Weitao},
+  title = {Our evolution towards {T-REX}: The prehistory of experimentation infrastructure at LinkedIn},
+  year = {2020},
+  month = {Sep.},
+  day = {24},
+  howpublished = {\url{https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i}},
+  note = {Accessed: 2025-11-02}
+}
+
+@misc{LinkedInTRexII,
+  author = {Ivaniuk, Alexander and Duan, Weitao},
+  title = {{A/B} testing at LinkedIn: Assigning variants at scale},
+  year = {2020},
+  month = {Dec.},
+  day = {16},
+  howpublished = {\url{https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment}},
+  note = {Accessed: 2025-11-02}
+}
+
+@misc{SpotifyEncouragement,
+  author = {Elbers, Benjamin},
+  title = {Encouragement Designs and Instrumental Variables for A/B Testing},
+  year = {2023},
+  month = {Aug.},
+  day = {24},
+  howpublished = {\url{https://engineering.atspotify.com/2023/08/encouragement-designs-and-instrumental-variables-for-a-b-testing}},
+  note = {Accessed: 2025-11-08}
+}
+
+# PROCEEDINGS
+
+@inproceedings{Ugander2013graph,
+author = {Ugander, Johan and Karrer, Brian and Backstrom, Lars and Kleinberg, Jon},
+title = {Graph cluster randomization: network exposure to multiple universes},
+year = {2013},
+isbn = {9781450321747},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2487575.2487695},
+doi = {10.1145/2487575.2487695},
+abstract = {A/B testing is a standard approach for evaluating the effect of online experiments; the goal is to estimate the `average treatment effect' of a new feature or condition by exposing a sample of the overall population to it. A drawback with A/B testing is that it is poorly suited for experiments involving social interference, when the treatment of individuals spills over to neighboring individuals along an underlying social network. In this work, we propose a novel methodology using graph clustering to analyze average treatment effects under social interference. To begin, we characterize graph-theoretic conditions under which individuals can be considered to be `network exposed' to an experiment. We then show how graph cluster randomization admits an efficient exact algorithm to compute the probabilities for each vertex being network exposed under several of these exposure conditions. Using these probabilities as inverse weights, a Horvitz-Thompson estimator can then provide an effect estimate that is unbiased, provided that the exposure model has been properly specified.Given an estimator that is unbiased, we focus on minimizing the variance. First, we develop simple sufficient conditions for the variance of the estimator to be asymptotically small in n, the size of the graph. However, for general randomization schemes, this variance can be lower bounded by an exponential function of the degrees of a graph. In contrast, we show that if a graph satisfies a restricted-growth condition on the growth rate of neighborhoods, then there exists a natural clustering algorithm, based on vertex neighborhoods, for which the variance of the estimator can be upper bounded by a linear function of the degrees. Thus we show that proper cluster randomization can lead to exponentially lower estimator variance when experimentally measuring average treatment effects under interference.},
+booktitle = {Proceedings of the 19th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages = {329–337},
+numpages = {9},
+keywords = {social networks, network effects, interference, graph clustering, causal inference, bucket testing, a/b testing},
+location = {Chicago, Illinois, USA},
+series = {KDD '13}
+}
+
+@inproceedings{Xu2015infrastructure,
+author = {Xu, Ya and Chen, Nanyu and Fernandez, Addrian and Sinno, Omar and Bhasin, Anmol},
+title = {From Infrastructure to Culture: {A/B} Testing Challenges in Large Scale Social Networks},
+year = {2015},
+isbn = {9781450336642},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2783258.2788602},
+doi = {10.1145/2783258.2788602},
+abstract = {A/B testing, also known as bucket testing, split testing, or controlled experiment, is a standard way to evaluate user engagement or satisfaction from a new service, feature, or product. It is widely used among online websites, including social network sites such as Facebook, LinkedIn, and Twitter to make data-driven decisions. At LinkedIn, we have seen tremendous growth of controlled experiments over time, with now over 400 concurrent experiments running per day. General A/B testing frameworks and methodologies, including challenges and pitfalls, have been discussed extensively in several previous KDD work [7, 8, 9, 10]. In this paper, we describe in depth the experimentation platform we have built at LinkedIn and the challenges that arise particularly when running A/B tests at large scale in a social network setting. We start with an introduction of the experimentation platform and how it is built to handle each step of the A/B testing process at LinkedIn, from designing and deploying experiments to analyzing them. It is then followed by discussions on several more sophisticated A/B testing scenarios, such as running offline experiments and addressing the network effect, where one user's action can influence that of another. Lastly, we talk about features and processes that are crucial for building a strong experimentation culture.},
+booktitle = {Proceedings of the 21th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+pages = {2227–2236},
+numpages = {10},
+keywords = {a/b testing, controlled experiments, measurement, network a/b testing, online experiments, social network},
+location = {Sydney, NSW, Australia},
+series = {KDD '15}
+}
+
+
+# ARTICLES
+
+@article{Aronow2017estimating,
+ ISSN = {19326157},
+ URL = {http://www.jstor.org/stable/26362172},
+ abstract = {This paper presents a randomization-based framework for estimating causal effects under interference between units motivated by challenges that arise in analyzing experiments on social networks. The framework integrates three components: (i) an experimental design that defines the probability distribution of treatment assignments, (ii) a mapping that relates experimental treatment assignments to exposures received by units in the experiment, and (iii) estimands that make use of the experiment to answer questions of substantive interest. We develop the case of estimating average unit-level causal effects from a randomized experiment with interference of arbitrary but known form. The resulting estimators are based on inverse probability weighting. We provide randomization-based variance estimators that account for the complex clustering that can occur when interference is present. We also establish consistency and asymptotic normality under local dependence assumptions. We discuss refinements including covariate-adjusted effect estimators and ratio estimation. We evaluate empirical performance in realistic settings with a naturalistic simulation using social network data from American schools. We then present results from a field experiment on the spread of anti-conflict norms and behavior among school students.},
+ author = {Peter M. Aronow and Cyrus Samii},
+ journal = {The Annals of Applied Statistics},
+ number = {4},
+ pages = {1912--1947},
+ publisher = {Institute of Mathematical Statistics},
+ title = {ESTIMATING AVERAGE CAUSAL EFFECTS UNDER GENERAL INTERFERENCE, WITH APPLICATION TO A SOCIAL NETWORK EXPERIMENT},
+ urldate = {2025-11-02},
+ volume = {11},
+ year = {2017}
+}
+
+@article{Eckles2017design,
+  title={Design and analysis of experiments in networks: Reducing bias from interference},
+  author={Eckles, Dean and Karrer, Brian and Ugander, Johan},
+  journal={Journal of Causal Inference},
+  volume={5},
+  number={1},
+  pages={20150021},
+  year={2017},
+  publisher={De Gruyter}
+}
+
+@article{Fatemi2023Network,
+  title = {Network experiment designs for inferring causal effects under interference}, 
+  url = {https://par.nsf.gov/biblio/10433402}, 
+  DOI = {10.3389/fdata.2023.1128649}, 
+  abstract = {Current approaches to A/B testing in networks focus on limiting interference, the concern that treatment effects can “spill over” from treatment nodes to control nodes and lead to biased causal effect estimation. In the presence of interference, two main types of causal effects are direct treatment effects and total treatment effects. In this paper, we propose two network experiment designs that increase the accuracy of direct and total effect estimations in network experiments through minimizing interference between treatment and control units. For direct treatment effect estimation, we present a framework that takes advantage of independent sets and assigns treatment and control only to a set of non-adjacent nodes in a graph, in order to disentangle peer effects from direct treatment effect estimation. For total treatment effect estimation, our framework combines weighted graph clustering and cluster matching approaches to jointly minimize interference and selection bias. Through a series of simulated experiments on synthetic and real-world network datasets, we show that our designs significantly increase the accuracy of direct and total treatment effect estimation in network experiments.}, 
+  journal = {Frontiers in Big Data}, 
+  volume = {6}, 
+  author = {Fatemi, Zahra and Zheleva, Elena}, 
+  year = {2023}
+}

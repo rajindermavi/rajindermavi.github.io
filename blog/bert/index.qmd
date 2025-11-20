@@ -1,0 +1,9 @@
+---
+title: "Tokenization to Bert"
+#author: "Rajinder Mavi"
+date: "2025-12-01"
+categories: [NLP, Data Science]
+image: "../../construction.png"
+draft: true
+---
+

@@ -1,6 +1,6 @@
 ---
 title: "LinkedIn Messaging Feature Proposal"
-#author: "Rajinder Mavi"
+author: "Rajinder Mavi"
 date: "2025-06-15"
 categories: [Data Science]
 image: "LinkedInGraph.png"
@@ -23,7 +23,7 @@ Essentially, the idea is to insert a field where a user can privately add a shor
 Typically rolling out a new feature on any social networking site requires collecting metrics to demonstrate it's impact and utility for users. In this article we will run through this vetting process.
 
 
-LinkedIn has a robust A/B testing methodology developed over years as the world's leading professional networking site. This [2015 article](https://content.linkedin.com/content/dam/engineering/site-assets/pdfs/ABTestingSocialNetwork_share.pdf) details early scaling solutions. And [this](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i) [pair](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment) of 2020 articles lays out their mature infrastructure and methodology for A/B testing, called LinkedIn Targeting, Ramping, and Experimentation platform, or T-REX. All this preparation yields impressive scaling capabilities, supporting 2,000 new experiments per week.
+LinkedIn has a robust A/B testing methodology developed over years as the world's leading professional networking site. This [2015 article](https://content.linkedin.com/content/dam/engineering/site-assets/pdfs/ABTestingSocialNetwork_share.pdf) [@Xu2015infrastructure] details early scaling solutions. And [this](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i) [@LinkedInTRexI] [pair](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment) [@LinkedInTRexII] of 2020 bog posts lay out their mature infrastructure and methodology for A/B testing, called LinkedIn Targeting, Ramping, and Experimentation platform, or T-REX. All this preparation yields impressive scaling capabilities, supporting 2,000 new experiments per week (as of the 2020 post).
 
 ## Testing Considerations
 
@@ -31,9 +31,8 @@ There are a number of considerations to address when designing a test. We'll bre
 
 ### Clustering and Segmentation
 
-Since our feature relates to user interactions, it would be wise to consider user clusters as the unit users would be randomized by and assigned treatment groups. This strategy is designed to limit the event of spillover from one treatment group to another. With this approach we must be careful in our estimation of parameters as user selection into treatment groups is affected. Users placed in treatment groups remains a random variable with the same probability distribution, but those random variables are no longer independent of each other.
-
-Considering the user base of LinkedIn, we would like to break down users into several categories. 
+There are many ways users may be segmented on a social platform like LinkedIn. 
+Consider the many user types on the platform:
 
 * Job Seekers/Professionals
 * Recruiters
@@ -43,9 +42,17 @@ Considering the user base of LinkedIn, we would like to break down users into se
 * Entrepreneurs/Startups
 * Corporate Managers
 
-As this enhancement relates to messaging, I would prefer to select A and B groups composed of well 
+However, natural clusters may not respect these nice categories. Managers and professionals within the same company may be highly networked, whereas professionals in different specialties (Materials Science vs Data Science) may be completely disjoint.
+
+The definition of `Natural Clusters' in this context may not be so straightforward, but any good A/B testing would either assert user independence (IE Stable Unit Treatment Value Assumption (SUTVA)) or find a methodology to address that issue. 
+
+Since our feature relates to user interactions, it would be wise to consider user clusters as the unit users would be randomized by and assigned treatment groups. This strategy is designed to limit the event of spillover from one treatment group to another. With this approach we must be careful in our estimation of parameters as user selection into treatment groups is affected. Users placed in treatment groups remains a random variable with the same probability distribution, but those random variables are no longer independent of each other.
+
+<!-- 
+    As this enhancement relates to messaging, I would prefer to select A and B groups composed of well 
 
  On top of these segments
+-->
 
 ### Conflicts
 
@@ -64,8 +71,6 @@ Typical A/B testing cycles run on a timeline of a minimum of 2 weeks to a maximu
 
 Ideally we would like to know the impact over a longer timeline. However, for business and experimental control reasons we would like to conclude on a quicker timeline, thus we can use adoption as a proxy on the assumption that memory aids will improve engagements between loosely connected members.
 
-
-
 ## KPIs and Statistics
 
 Now time for the fun stuff.
@@ -81,6 +86,7 @@ There are many possible KPIs we could utilize for the above aspects we would lik
 $$
 A = \frac{\#\text{users who used the feature at least once}}{\#\text{users exposed to the feature}}
 $$
+
 * Frequency.
     - Measure total number of uses over the course of the trial. Higher frequency of use implies each user finds value in the feature over many connections.
 As use of the feature is dependent on entering the messaging window, an opportunity would be defined as entering a messaging window where the summary is not yet filled in.

@@ -40,5 +40,11 @@
   },
   "blog/hofstadter-butterfly/index.qmd": {
     "index.html": "e390711e"
+  },
+  "blog/bert/index.qmd": {
+    "index.html": "9a999f7e"
+  },
+  "blog/ab_graph_cluster_randomization/index.qmd": {
+    "index.html": "3926af3f"
   }
 }

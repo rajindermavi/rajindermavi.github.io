@@ -28,3 +28,8 @@ format:
 execute:
   freeze: auto
 
+bibliography:
+  - biblio/ab_testing.bib
+  - biblio/general.bib
+  - biblio/math.bib
+  - biblio/ml.bib
