@@ -8,7 +8,7 @@ for a set of observations $(X_1,..,X_n)$ of a random variable $X$
 with mean $\mu$ and variance $\sigma^2$. 
 
 
-* Expectation
+**Expectation Estimator**
 
 $$
 \bar X_n = \frac{1}{n} \sum_{i=1}^n X_i
@@ -22,12 +22,12 @@ It is useful to find (or at least bound above) the variance of the estimator,
 since that guarantees a good estimate if it can be shown to be small. 
 The variance is 
 $$
-Var(\bar X_n)  = \mathbb{E}[(\bar X_n - \mathbb{E}[\bar_n])^2] = \frac{1}{n}\sigma^2
+Var(\bar X_n)  = \mathbb{E}[(\bar X_n - \mathbb{E}[\bar X_n])^2] = \frac{1}{n}\sigma^2
 $$
 so the variance tends to zero with a large sample, 
 assuring a quality estimator that is unbiased and converges to the quantity of interest.
 
-* Variance
+**Variance Estimator**
 
 $$
 S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X_n)^2
