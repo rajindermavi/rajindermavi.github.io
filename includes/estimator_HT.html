@@ -163,25 +163,48 @@ window.Quarto = {
 
 <p>Let $ = {1,2,…,N} $ be a finite population. For each <span class="math inline">\(i\in\mathcal{K}\)</span>, let <span class="math inline">\(Y_i\)</span> be an observable of unit <span class="math inline">\(i\)</span>. Our goal is to estimate <span class="math display">\[
 Y = \sum_{i=1}^N Y_i
-\]</span> the total of interest.</p>
-<p>To construct the estimator we take a random sample from <span class="math inline">\(\mathcal{K}\)</span>. For <span class="math inline">\(n &lt; N\)</span> let <span class="math inline">\(\bf{S} = \{i_1,...,i_n\} \subset \mathcal{S}\)</span> be a random sample. Let <span class="math inline">\(\pi_i\)</span> be the probability $i \bf{S}<span class="math inline">\(.
-The variance of Horvitz Thompson is then\)</span>$ Var(Y) = <em>{i=1}<sup>N<em>{j=1;ji}^{N} (<em>ip_j - p</em>{ij})( - )^2 <span class="math display">\[
-\]</span> Var(mu) = </em>{i=1}</sup>N</em>{j=1;ji}^{N} (<em>ip_j - p</em>{ij})( - )^2 $$</p>
-<p>It is not hard to see the variance has an upper bound, <span class="math display">\[
-Var(\hat Y) \leq \sum_{i=1}^n \frac{Y_i^2}{\pi_i}
-\]</span> but if some of the <span class="math inline">\(\pi_i\)</span> are small this raises the small denominator problem. So care would have to be taken in this case. This danger can be mollified through a modification of the HTE, the Hajek estimator.</p>
-<p>On the other hand, the above gives an upper bound on the estimate of the mean <span class="math display">\[
-Var(\hat mu) \leq \frac{1}{N^2} \sum_{i=1}^n \frac{Y_i^2}{\pi_i}
+\]</span> the total of interest. And <span class="math display">\[
+\tau = \frac{1}{N}  \sum_{i=1}^N Y_i
+\]</span> the average of the population.</p>
+<p>To construct the estimator we take a random sample of <span class="math inline">\(n&lt; N\)</span> units from <span class="math inline">\(\mathcal{K}\)</span>. Any sampling method is allowed, but the obtained sample must have distinct units. Let <span class="math inline">\(\pi_i\)</span> be the probability the <span class="math inline">\(i^{th}\)</span> unit is included in the sample (assume <span class="math inline">\(\pi_i &gt; 0\)</span>). Denote the random sample by <span class="math inline">\(\bf{S} = \{i_1,...,i_n\} \subset \mathcal{S}\)</span>. The Horvitz Thompson esimator is <span class="math display">\[
+\hat Y_{HT} = \sum_{i\in \bf{S}} \frac{Y_i}{\pi_i} = \sum_{i=1}^N \frac{Y_i 1_{\{i\in \bf S\}}}{\pi_i}
+\]</span> and <span class="math display">\[
+\hat \tau_{HT} = \frac{1}{N} \hat Y_{HT}
 \]</span></p>
-<ul>
-<li>Example … An example of the HTE is useful. Consider a collection of cities with populations greater than some lower bound <span class="math inline">\(b\)</span> in some state. Let the cities be enumerated by <span class="math inline">\(\mathcal{K} =  \{1,2,..,N\}\)</span>. Let <span class="math inline">\(Y_i\)</span> be the total number of hotels in the ith city.</li>
-</ul>
-<p>Let <span class="math inline">\(\pi_i\)</span> be proportional to the population of the ith city. <span class="math display">\[
-\pi_i = \frac{q_i}{\sum_{i=1}^N q_i}
-\]</span> where <span class="math inline">\(q_i\)</span> is the population of the ith city. The estimate of the average number of hotels in large cities would be given by <span class="math inline">\(\hat mu\)</span> after sampling <span class="math inline">\(n\)</span> cities. <span class="math display">\[
-\hat mu = \frac{1}{n}\sum_{i\in \bf{S}} \frac{Y_i}{\pi_i}
-= (\sum_{i=1}^N q_i) \left( \frac{1}{n} \sum_{i \in \bf{S}} \frac{Y_i}{q_i} \right)
-\]</span> the summand can be seen to be the average number of hotels by population, so the average of averages gives an estimate of the hotel density. The prefactor of the total population scales the estimate up to the population. Thus we have our estimate for the total hotels in large cities in our state.</p>
+<p>The estimator is unbiased <span class="math display">\[
+    \mathbb{E}[\hat Y_{HT}] = Y.
+\]</span> <span class="math display">\[
+    \mathbb{E}[\hat tau_{HT}] = \tau.
+\]</span></p>
+<p>To state the variance of <span class="math inline">\(\hat Y_{HT}\)</span>, define <span class="math inline">\(\pi_{ij}\)</span> as the probability that both <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> belong to <span class="math inline">\(\bf{S}\)</span>. The variance of Horvitz Thompson is then <span class="math display">\[
+Var(\hat Y_{HT})
+    =
+        \sum_{i=1}^N \sum_{j=1}^{N} \frac{\pi_{ij} - \pi_i\pi_j}{\pi_i\pi_j} Y_i Y_j
+\]</span> (it follows from the definition that $<em>{ii} = <em>i <span class="math inline">\()\)</span>$ Var(</em>{HT}) = </em>{i=1}^N _{j=1}^{N} Y_i Y_j $$</p>
+<p>As we want to assure that the Horwitz Thompson estimator converges well to the quantity of interest, controlling the variance is key. It is not hard to see the variance has an upper bound, <span class="math display">\[
+Var(\hat Y_{HT}) \leq \sum_{i,j=1}^N \left(\frac{1}{\pi_i^{1/2}\pi_j^{1/2}} - 1\right) Y_i Y_j
+\]</span> but if some of the <span class="math inline">\(\pi_i\)</span> are small this raises the small denominator problem. So care would have to be taken in this case. This danger can be mollified through a modification of the HTE, the Hajek estimator. (Also note that as the sample becomes larger, the <span class="math inline">\(\pi_i\)</span> become larger, better controlling the variance.)</p>
+<p><strong>Example</strong></p>
+<p>Consider a collection of cities with populations greater than some lower bound <span class="math inline">\(b\)</span> in some state. Let the cities be enumerated by <span class="math inline">\(\mathcal{K} =  \{1,2,..,N\}\)</span>. Let <span class="math inline">\(Y_i\)</span> be the total number of hotels in the ith city.</p>
+<p>Sample as follows, select <span class="math inline">\(m\)</span> units from <span class="math inline">\(\mathcal{K}\)</span> with replacement with probability <span class="math inline">\(p_i\)</span>. Here let <span class="math inline">\(p_i\)</span> be proportional to the population of the <span class="math inline">\(i^{th}\)</span> city. Let <span class="math inline">\(\bf{S}\)</span> be the set of distinct units from the sample. The inclusion probabilities are <span class="math display">\[
+\pi_i = 1 - (1 - p_i)^m
+\]</span> <span class="math display">\[
+\pi_{ij} = \pi_i + \pi_j - (1 - (1 - p_i - p_j)^m)
+\]</span></p>
+<p>The estimate of the average number of hotels in large cities would be given by <span class="math inline">\(\hat Y_{HT}\)</span> after sampling <span class="math display">\[
+\hat Y_{HT} = \sum_{i\in \bf{S}} \frac{Y_i}{\pi_i}
+= \sum_{i\in \bf{S}} \frac{Y_i}{1 - (1 - p_i)^m}
+\]</span> with an upper bound on the variance of <span class="math display">\[
+Var(\hat Y_{HT}) \leq \sum_{i,j=1}^N
+    \left(\frac{1}{(1 - (1 - p_i)^m)^{1/2}(1 - (1 - p_j)^m)^{1/2}} - 1\right) Y_i Y_j
+\]</span> The variance does not tend to zero even as m tends to infinity. But, for the Horwitz Thompson average, <span class="math display">\[
+Var(\hat \tau_{HT}) \leq \frac{1}{N^2}\sum_{i,j=1}^N
+    \left(\frac{1}{(1 - (1 - p_i)^m)^{1/2}(1 - (1 - p_j)^m)^{1/2}} - 1\right) Y_i Y_j
+\]</span> If we make some simple assumptions <span class="math display">\[
+p_i \sim a_i/N
+\]</span> for nicely chosen <span class="math inline">\(a_i\)</span> and, for <span class="math inline">\(0 &lt; \alpha &lt; 1\)</span>, <span class="math display">\[
+m =  \alpha N
+\]</span> then the variance tends to zero for large m.</p>
 
 
 
