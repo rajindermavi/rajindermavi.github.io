@@ -1,0 +1,62 @@
+
+In a causal experiment we would like to measure 
+the impact of a treatment on a quantity of interest.
+To fix ideas, suppose we have a social media site and are considering 
+an update on the messaging function. 
+The goal might be to increase user messaging frequency or even to 
+improve the quality of messages as measured by the overall length of each message.
+In the classical sense, there is no way to practically isolate users
+in a way that would satisfy the SUTVA assumption, 
+hence the need to update the theoretical foundations causal experiments are based upon. 
+
+
+Enumerate the users $\mathcal{V} = \{1,2,...,N\}$.
+Typically, the network is modeled as a graph $\mathcal{G} = (\mathcal{V},\mathcal{E})$.
+In our example two units may be connected by an edge if they are freinds. 
+For the sake of the experiment, each user is assigned to one of two groups $z_i = 0,1$, 
+with $0$ being the control and $1$ being the treatment.
+
+
+With an assignment of $z = (z_1,..,z_N)$ the total of the quantity of interest is 
+$$
+Y(z) = \sum_{i=1}^N Y_i(z)
+$$
+where $Y_i$ is the quantity of interest for the $i^{th}$ individual.
+For our messaging example, $Y_i$ might be the total number of messages 
+the user sent within a two week period.
+Notice at this point we are allowing that each individual's behavior depends on the 
+entire assignment vector!
+
+
+The ulimate goal is to estimate
+$$
+\tau(\vec{1},\vec{0}) = \frac1N\sum_{i=1}^N left(Y_i(\vec{1}) - Y_i(\vec{0}) \right)
+$$
+the Average Treatment Effect (ATE). 
+Here $\vec{1}$ ($\vec{0}$) is the assignment of all $1$s ($0$s).
+Of course there is no world where we can simultaneously assign all units both 1 and 0,
+hence the goal of our study.
+
+
+It would be hard to make it very far without making some kind of assumptions on the network effects.
+How can we make conclusions about $\tau(\vec{1},\vec{0})$ if we can't isolate the assignment groups?
+The earliest paper I found in this direction is [@Ugander2013Graph].
+The authors make the assumption of a *net exposure condition* which 
+effectively assumes that if sufficiently many agents of an individuals neighborhood belong
+to a given assignment group, the individual will behave as if the entire network 
+has that assignment.
+That is, for indivual $i$, suppose there are $k_i$ individuals in $B_\epsilon(i)^*$ assigned $z_j = 1 (0)$, 
+then we can assume $i$ behaves as if $z = \vec{1} (\vec{0})$. 
+Explicit choices of $k_i$ can vary, but they consider $k_i = $ 
+the size of the neighborhood $|B_\epsilon(i)^*|$, 
+or a proportion of the neighborhood $\kappa |B_\epsilon(i)^*|$,
+or simply a constant minimum over the network $ \min(\kappa,|B_\epsilon(i)^*|) $.
+
+The Ugander paper is notable because they tackle the problem of a globally connected network of individuals.
+Compare this to the more mature literature of estimating the ATE 
+when there are groups of interacting agents [\@Hallorhan].
+
+We are almost ready for the analysis now, but there are many directions to go. 
+
+
+
