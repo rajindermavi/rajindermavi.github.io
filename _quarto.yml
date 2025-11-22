@@ -24,6 +24,12 @@ format:
       - cosmo
       - brand
     css: styles.css
+    page-footer:
+      left: |
+        Having trouble? Try the backup site at 
+        <a href="https://rajindermavi.github.io" target="_blank">https://rajindermavi.github.io</a>
+    include-in-header: _includes/head.html
+
 
 execute:
   freeze: auto

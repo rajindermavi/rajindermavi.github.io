@@ -7,11 +7,15 @@ image: "../../construction.png"
 draft: true
 ---
 
-* Estimators
+Background for this note includes
 
-{{< include ../../includes/estimator.qmd >}}
+::: {.callout-note title="Estimator" collapse="true"}
+{{< include /_includes/estimator.qmd >}}
+:::
 
-* Horvitz Thompson Estimator
+and
 
-{{< include ../../includes/estimator_HT.qmd >}}
+::: {.callout-note title="Horwitz Thompson Estimator" collapse="true"}
+{{< include /_includes/estimator_HT.qmd >}}
+:::
 

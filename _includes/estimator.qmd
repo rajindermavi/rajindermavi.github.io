@@ -44,10 +44,10 @@ nevertheless still tends to zero with a large sample.
 
 Note we did not use the estimator
 $$
-\tilde S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X_n)^2
+\tilde S_n^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X_n)^2
 $$
 as this woule have expectation 
 $$
-\mathbb{E} [\tilde S_n^2] = \frac{n}{n-1}\sigma^2
+\mathbb{E} [\tilde S_n^2] = \frac{n-1}{n}\sigma^2
 $$
 and would be a biased estimator. 

@@ -46,5 +46,11 @@
   },
   "blog/ab_graph_cluster_randomization/index.qmd": {
     "index.html": "3926af3f"
+  },
+  "includes/estimator.qmd": {
+    "estimator.html": "bc82b03a"
+  },
+  "includes/estimator_HT.qmd": {
+    "estimator_HT.html": "dc46b891"
   }
 }
