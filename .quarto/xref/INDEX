@@ -52,5 +52,8 @@
   },
   "includes/estimator_HT.qmd": {
     "estimator_HT.html": "dc46b891"
+  },
+  "blog/causal_inference_with_interference/index.qmd": {
+    "index.html": "7728e3fa"
   }
 }

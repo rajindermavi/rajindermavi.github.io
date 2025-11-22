@@ -1,0 +1,36 @@
+---
+title: "Causal Inference With Interference"
+#author: "Rajinder Mavi"
+date: "2025-12-01"
+categories: [AB Testing, Data Science, Statistics, Academic]
+image: "/_assets/construction.png"
+draft: true
+---
+
+Background for this note includes
+
+::: {.callout-note title="Estimator" collapse="true"}
+{{< include /_includes/estimator.qmd >}}
+:::
+
+and
+
+::: {.callout-note title="Horvitz Thompson Estimator" collapse="true"}
+{{< include /_includes/estimator_HT.qmd >}}
+:::
+
+Classic causal testing typically relies on an assumption of 
+no interference between individuals (for example, the SUTVA framework).
+With the no-interference assumption, the outcomes of each
+individual are unaffected by the treatment of each other individual.
+
+
+Social media created a need for causal testing theory and methods that flips that assumptions
+and conversely handles the case of dense interactions between individuals.
+From the perspective of the classical theory there would be no guarantee such methodolody 
+would exist, which makes the discoveries of the early social media days a
+remarkable story.
+
+Before the advent of the modern theory, 
+
+apers [@Hudgens2008Causal], [@Aronow2017estimating], [@Ugander2013graph]
