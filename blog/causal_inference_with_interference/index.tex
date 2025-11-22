@@ -1,0 +1,462 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+% definitions for citeproc citations
+\NewDocumentCommand\citeproctext{}{}
+\NewDocumentCommand\citeproc{mm}{%
+  \begingroup\def\citeproctext{#2}\cite{#1}\endgroup}
+\makeatletter
+ % allow citations to break across lines
+ \let\@cite@ofmt\@firstofone
+ % avoid brackets around text for \cite:
+ \def\@biblabel#1{}
+ \def\@cite#1#2{{#1\if@tempswa , #2\fi}}
+\makeatother
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-indent, #2 entry-spacing
+ {\begin{list}{}{%
+  \setlength{\itemindent}{0pt}
+  \setlength{\leftmargin}{0pt}
+  \setlength{\parsep}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+   \setlength{\leftmargin}{\cslhangindent}
+   \setlength{\itemindent}{-1\cslhangindent}
+  \fi
+  % set entry spacing
+  \setlength{\itemsep}{#2\baselineskip}}}
+ {\end{list}}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{\hfill\break\parbox[t]{\linewidth}{\strut\ignorespaces#1\strut}}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{\strut#1\strut}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Causal Inference With Interference},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Causal Inference With Interference}
+\author{}
+\date{2025-12-01}
+\begin{document}
+\maketitle
+
+
+In a causal experiment we would like to measure the impact of a
+treatment on a quantity of interest. To fix ideas, suppose we have a
+social media site and are considering an update on the messaging
+function. The goal might be to increase user messaging frequency or even
+to improve the quality of messages as measured by the overall length of
+each message. In the classical sense, there is no way to practically
+isolate users in a way that would satisfy the SUTVA assumption, hence
+the need to update the theoretical foundations causal experiments are
+based upon.
+
+Classic causal testing typically relies on an assumption of no
+interference between individuals (for example, the SUTVA framework).
+With the no-interference assumption, the outcomes of each individual are
+unaffected by the treatment of each other individual.
+
+Social media created a need for causal testing theory and methods that
+flips that assumptions and conversely handles the case of dense
+interactions between individuals. From the perspective of the classical
+theory there would be no guarantee such methodolody would exist, which
+makes the discoveries of the early social media days a remarkable story.
+
+Background for this note includes the following \ldots{}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, colback=white, rightrule=.15mm, toptitle=1mm, arc=.35mm, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Estimator}, colframe=quarto-callout-note-color-frame, leftrule=.75mm, breakable, opacityback=0, bottomtitle=1mm, opacitybacktitle=0.6, left=2mm]
+
+In the language of statistics, an esimator is a formula or rule employed
+to estimate a quantity of interest based on observed data. An estimator
+is said to be unbiased if it's expectation is equal to the quantity of
+interest.
+
+Familiar examples include the Expectation and Variance estimators for a
+set of observations \((X_1,..,X_n)\) of a random variable \(X\) with
+mean \(\mu\) and variance \(\sigma^2\).
+
+\textbf{Expectation Estimator}
+
+\[
+\bar X_n = \frac{1}{n} \sum_{i=1}^n X_i
+\] The estimator is unbiased since \[
+\mathbb{E} [\bar X_n] = \mu
+\]
+
+It is useful to find (or at least bound above) the variance of the
+estimator, since that guarantees a good estimate if it can be shown to
+be small. The variance is \[
+Var(\bar X_n)  = \mathbb{E}[(\bar X_n - \mathbb{E}[\bar X_n])^2] = \frac{1}{n}\sigma^2
+\] so the variance tends to zero with a large sample, assuring a quality
+estimator that is unbiased and converges to the quantity of interest.
+
+\textbf{Variance Estimator}
+
+\[
+S_n^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \bar X_n)^2
+\] \[
+\mathbb{E} [S_n^2] = \sigma^2
+\]
+
+The variance is somewhat more complicated, \[
+Var(S^2_n) = \frac1n \left( \mathbb{E}[(X - \mu)^4] -\frac{n-3}{n-1}\sigma^4 \right)
+\] nevertheless still tends to zero with a large sample.
+
+Note we did not use the estimator \[
+\tilde S_n^2 = \frac{1}{n}\sum_{i=1}^n (X_i - \bar X_n)^2
+\] as this woule have expectation \[
+\mathbb{E} [\tilde S_n^2] = \frac{n-1}{n}\sigma^2
+\] and would be a biased estimator.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, colback=white, rightrule=.15mm, toptitle=1mm, arc=.35mm, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Horvitz Thompson Estimator}, colframe=quarto-callout-note-color-frame, leftrule=.75mm, breakable, opacityback=0, bottomtitle=1mm, opacitybacktitle=0.6, left=2mm]
+
+Let \$\mathcal{K} = \{1,2,\ldots,N\} \$ be a finite population. For each
+\(i\in\mathcal{K}\), let \(Y_i\) be an observable of unit \(i\). Our
+goal is to estimate \[
+Y = \sum_{i=1}^N Y_i
+\] the total of interest. And \[
+\tau = \frac{1}{N}  \sum_{i=1}^N Y_i
+\] the average of the population.
+
+To construct the estimator we take a random sample of \(n< N\) units
+from \(\mathcal{K}\). Any sampling method is allowed, but the obtained
+sample must have distinct units. Let \(\pi_i\) be the probability the
+\(i^{th}\) unit is included in the sample (assume \(\pi_i > 0\)). Denote
+the random sample by \(\bf{S} = \{i_1,...,i_n\} \subset \mathcal{S}\).
+The Horvitz Thompson esimator is \[
+\hat Y_{HT} = \sum_{i\in \bf{S}} \frac{Y_i}{\pi_i} = \sum_{i=1}^N \frac{Y_i 1_{\{i\in \bf S\}}}{\pi_i}
+\] and \[
+\hat \tau_{HT} = \frac{1}{N} \hat Y_{HT} 
+\]
+
+The estimator is unbiased \[
+    \mathbb{E}[\hat Y_{HT}] = Y.
+\] \[
+    \mathbb{E}[\hat \tau_{HT}] = \tau.
+\]
+
+To state the variance of \(\hat Y_{HT}\), define \(\pi_{ij}\) as the
+probability that both \(i\) and \(j\) belong to \(\bf{S}\). The variance
+of Horvitz Thompson is then \[
+Var(\hat Y_{HT}) 
+    = 
+        \sum_{i=1}^N \sum_{j=1}^{N} \frac{\pi_{ij} - \pi_i\pi_j}{\pi_i\pi_j} Y_i Y_j
+\] it follows from the definition that \(\pi_{ii}\) = \(\pi_i\). The
+variance of tha average estimator is \[
+Var(\hat \tau_{HT}) 
+    = 
+        \frac{1}{N^2}\sum_{i=1}^N \sum_{j=1}^{N} \frac{\pi_{ij} - \pi_i\pi_j}{\pi_i\pi_j} Y_i Y_j
+\]
+
+As we want to assure that the Horwitz Thompson estimator converges well
+to the quantity of interest, controlling the variance is key. It is not
+hard to see the variance has an upper bound, \[
+Var(\hat Y_{HT}) \leq \sum_{i,j=1}^N \left(\frac{1}{\pi_i^{1/2}\pi_j^{1/2}} - 1\right) Y_i Y_j
+\] but if some of the \(\pi_i\) are small this raises the small
+denominator problem. So care would have to be taken in this case. This
+danger can be mollified through a modification of the HTE, the Hajek
+estimator. (Also note that as the sample becomes larger, the \(\pi_i\)
+become larger, better controlling the variance.)
+
+\textbf{Example}
+
+Consider a collection of cities with populations greater than some lower
+bound \(b\) in some state. Let the cities be enumerated by
+\(\mathcal{K} =  \{1,2,..,N\}\). Let \(Y_i\) be the total number of
+hotels in the ith city.
+
+Sample \(n\) units from \(\mathcal{K}\) by Simple Random Sampling
+Without Replacement. The inclusion probabilities are \[
+\pi_i = n/N
+\] \[
+\pi_{ij} = \frac{n(n-1)}{N(N-1)}
+\]
+
+The estimate of the average number of hotels in large cities would be
+given by \(\hat Y_{HT}\) after sampling \[
+\hat Y_{HT} = \sum_{i\in \bf{S}} \frac{Y_i}{\pi_i}
+ = \frac{N}{n}\sum_{i\in \bf{S}} Y_i
+\] with variance \[
+Var(\hat Y_{HT}) = N^2 \frac{1 - n/N}{n} S^2
+\] where \(S^2\) is the population variance. The variance does not tend
+to zero even as m tends to infinity. But, for the Horwitz Thompson
+average, \[
+Var(\hat \tau_{HT}) = \frac{1 - n/N}{n} S^2
+\] Making a simple assumption \(n \propto N^\alpha\) for
+\(0 < \alpha < 1\) or \(n = \beta N\) for \(0 < \beta < 1\), the
+variance of the estimator of the average tends to zero.
+
+\end{tcolorbox}
+
+Enumerate the users \(\mathcal{V} = \{v_1,v_2,...,v_N\}\). Typically,
+the network is modeled as a graph
+\(\mathcal{G} = (\mathcal{V},\mathcal{E})\). In our example two units
+may be connected by an edge if they are freinds. For the sake of the
+experiment, each user is assigned to one of two groups \(z_i = 0,1\),
+with \(0\) being the control and \(1\) being the treatment.
+
+With an assignment of \(z = (z_1,z_2,..,z_N)\) the total of the quantity
+of interest is \[
+Y(z) = \sum_{i=1}^N Y_i(z)
+\] where \(Y_i\) is the quantity of interest for the \(i^{th}\)
+individual. For our messaging example, \(Y_i\) might be the total number
+of messages the user sent within a two week period. Notice at this point
+we are allowing that each individual's behavior depends on the entire
+assignment vector!
+
+The ulimate goal is to estimate \[
+\tau(\vec{1},\vec{0}) = \frac1N\sum_{i=1}^N \left(Y_i(\vec{1}) - Y_i(\vec{0}) \right)
+\label{eq_ate}
+\] the Average Treatment Effect (ATE). Here \(\vec{1}\) (\(\vec{0}\)) is
+the assignment of \(1\)s (\(0\)s) to all individuals. Of course there is
+no world where we can simultaneously assign all units both 1 and 0,
+hence the goal of our study.
+
+It would be hard to make it very far without making some kind of
+assumptions on the network effects. How can we make conclusions about
+\(\tau(\vec{1},\vec{0})\) if we can't isolate the assignment groups? The
+earliest paper I found in this direction is (Ugander et al. 2013). The
+authors make the assumption of a \textbf{\emph{net exposure condition}}
+which effectively assumes that if sufficiently many agents of an
+individuals neighborhood belong to a given assignment group, the
+individual will behave as if the entire network has that assignment.
+That is, for indivual \(v\in\mathcal{V}\), suppose there are \(k_i\)
+individuals in \(A_{1,r}(v)\) assigned \(z_j = 1 (0)\), then we can
+assume \(i\) behaves as if \(z = \vec{1} (\vec{0})\). Explicit choices
+of \(k_i\) can vary, but the authors consider \(k_i\) the size of the
+neighborhood \(k_i = |A_{1,r}(v)|\), or a proportion of the neighborhood
+\(k_i = \kappa |A_{1,r}(v)|\), or simply a constant minimum over the
+network \(k_i = \kappa\).
+
+The Ugander paper is notable because they tackle the problem of a
+globally connected network of individuals. Compare this to the more
+mature literature of estimating the ATE when there are groups of
+interacting agents (Hudgens and Halloran 2008). In that paper, the
+population is stratified into groups, and interference is limited to
+individuals among the same group. For example, a group might be all
+students in a particular elementary school. The analogy of the net
+exposure condition, is the assumption that any two assignments of a
+fixed group are equivalent if they have the same number of individuals
+assigned to 1 and 0 respectively.
+
+\begin{tcolorbox}[enhanced jigsaw, bottomrule=.15mm, toprule=.15mm, colback=white, rightrule=.15mm, toptitle=1mm, arc=.35mm, titlerule=0mm, colbacktitle=quarto-callout-note-color!10!white, coltitle=black, title=\textcolor{quarto-callout-note-color}{\faInfo}\hspace{0.5em}{Hudgens and Halloran, 2008}, colframe=quarto-callout-note-color-frame, leftrule=.75mm, breakable, opacityback=0, bottomtitle=1mm, opacitybacktitle=0.6, left=2mm]
+
+The Hudgens and Halloran paper outlines detailed experiment designs. The
+goal is to measure quantities like (\textbf{eq\_ate?})
+
+\end{tcolorbox}
+
+papers (Hudgens and Halloran 2008), (Aronow and Samii 2017), (Ugander et
+al. 2013), (Eckles, Karrer, and Ugander 2017)
+
+\phantomsection\label{refs}
+\begin{CSLReferences}{1}{0}
+\bibitem[\citeproctext]{ref-Aronow2017Estimating}
+Aronow, Peter M., and Cyrus Samii. 2017. {``Estimating Average Causal
+Effects Under General Interference, with Application to a Social Network
+Experiment.''} \emph{The Annals of Applied Statistics} 11 (4): 1912--47.
+\url{http://www.jstor.org/stable/26362172}.
+
+\bibitem[\citeproctext]{ref-Eckles2017Design}
+Eckles, Dean, Brian Karrer, and Johan Ugander. 2017. {``Design and
+Analysis of Experiments in Networks: Reducing Bias from Interference.''}
+\emph{Journal of Causal Inference} 5 (1): 20150021.
+
+\bibitem[\citeproctext]{ref-Hudgens2008Causal}
+Hudgens, Michael G., and M. Elizabeth Halloran. 2008. {``Toward Causal
+Inference with Interference.''} \emph{Journal of the American
+Statistical Association} 103 (482): 832--42.
+\url{http://www.jstor.org/stable/27640105}.
+
+\bibitem[\citeproctext]{ref-Ugander2013Graph}
+Ugander, Johan, Brian Karrer, Lars Backstrom, and Jon Kleinberg. 2013.
+{``Graph Cluster Randomization: Network Exposure to Multiple
+Universes.''} In \emph{Proceedings of the 19th ACM SIGKDD International
+Conference on Knowledge Discovery and Data Mining}, 329--37. KDD '13.
+New York, NY, USA: Association for Computing Machinery.
+\url{https://doi.org/10.1145/2487575.2487695}.
+
+\end{CSLReferences}
+
+
+
+
+\end{document}

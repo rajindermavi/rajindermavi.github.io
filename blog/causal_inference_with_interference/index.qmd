@@ -3,21 +3,21 @@ title: "Causal Inference With Interference"
 #author: "Rajinder Mavi"
 date: "2025-12-01"
 categories: [AB Testing, Data Science, Statistics, Academic]
-image: "/_assets/construction.png"
-draft: true
+image: /_assets/construction.png
+draft: false
 ---
 
-Background for this note includes
 
-::: {.callout-note title="Estimator" collapse="true"}
-{{< include /_includes/estimator.qmd >}}
-:::
+In a causal experiment we would like to measure 
+the impact of a treatment on a quantity of interest.
+To fix ideas, suppose we have a social media site and are considering 
+an update on the messaging function. 
+The goal might be to increase user messaging frequency or even to 
+improve the quality of messages as measured by the overall length of each message.
+In the classical sense, there is no way to practically isolate users
+in a way that would satisfy the SUTVA assumption, 
+hence the need to update the theoretical foundations causal experiments are based upon. 
 
-and
-
-::: {.callout-note title="Horvitz Thompson Estimator" collapse="true"}
-{{< include /_includes/estimator_HT.qmd >}}
-:::
 
 Classic causal testing typically relies on an assumption of 
 no interference between individuals (for example, the SUTVA framework).
@@ -31,6 +31,86 @@ From the perspective of the classical theory there would be no guarantee such me
 would exist, which makes the discoveries of the early social media days a
 remarkable story.
 
-Before the advent of the modern theory, 
 
-apers [@Hudgens2008Causal], [@Aronow2017estimating], [@Ugander2013graph]
+Background for this note includes the following ...
+
+::: {.callout-note title="Estimator" collapse="true"}
+{{< include /_includes/estimator.qmd >}}
+:::
+
+::: {.callout-note title="Horvitz Thompson Estimator" collapse="true"}
+{{< include /_includes/estimator_HT.qmd >}}
+:::
+
+
+
+
+Enumerate the users $\mathcal{V} = \{v_1,v_2,...,v_N\}$.
+Typically, the network is modeled as a graph $\mathcal{G} = (\mathcal{V},\mathcal{E})$.
+In our example two units may be connected by an edge if they are freinds. 
+For the sake of the experiment, each user is assigned to one of two groups $z_i = 0,1$, 
+with $0$ being the control and $1$ being the treatment.
+
+
+With an assignment of $z = (z_1,z_2,..,z_N)$ the total of the quantity of interest is 
+$$
+Y(z) = \sum_{i=1}^N Y_i(z)
+$$
+where $Y_i$ is the quantity of interest for the $i^{th}$ individual.
+For our messaging example, $Y_i$ might be the total number of messages 
+the user sent within a two week period.
+Notice at this point we are allowing that each individual's behavior depends on the 
+entire assignment vector!
+
+
+The ulimate goal is to estimate
+$$
+\tau(\vec{1},\vec{0}) = \frac1N\sum_{i=1}^N \left(Y_i(\vec{1}) - Y_i(\vec{0}) \right)
+$$ {#eq-ate}
+the Average Treatment Effect (ATE). 
+Here $\vec{1}$ ($\vec{0}$) is the assignment of $1$s ($0$s) to all individuals.
+Of course there is no world where we can simultaneously assign all units both 1 and 0,
+hence the goal of our study.
+
+
+It would be hard to make it very far without making some kind of assumptions on the network effects.
+How can we make conclusions about $\tau(\vec{1},\vec{0})$ if we can't isolate the assignment groups?
+The earliest paper I found in this direction is [@Ugander2013Graph].
+The authors make the assumption of a ***net exposure condition*** which 
+effectively assumes that if sufficiently many agents of an individuals neighborhood belong
+to a given assignment group, the individual will behave as if the entire network 
+has that assignment.
+That is, for indivual $v\in\mathcal{V}$, suppose there are $k_i$ individuals in $A_{1,r}(v)$ assigned $z_j = 1 (0)$, 
+then we can assume $i$ behaves as if $z = \vec{1} (\vec{0})$. 
+Explicit choices of $k_i$ can vary, but the authors consider $k_i$ 
+the size of the neighborhood $k_i = |A_{1,r}(v)|$, 
+or a proportion of the neighborhood $k_i = \kappa |A_{1,r}(v)|$,
+or simply a constant minimum over the network $k_i = \kappa$.
+
+The Ugander paper is notable because they tackle the problem of a globally connected network of individuals.
+Compare this to the more mature literature of estimating the ATE 
+when there are groups of interacting agents [@Hudgens2008Causal].
+In that paper, the population is stratified into groups, 
+and interference is limited to individuals among the same group.
+For example, a group might be all students in a particular elementary school.
+The analogy of the net exposure condition, is the assumption that any two assignments of a fixed group
+are equivalent if they have the same number of individuals assigned to 1 and 0 respectively.
+
+::: {.callout-note title="Hudgens and Halloran, 2008" collapse="true"}
+The Hudgens and Halloran paper outlines detailed experiment designs.
+[Sampling proceedures]
+The goal is to measure quantities like (@eq-ate) by group and by individual.
+They differentiate a number of different causal effects
+* Direct - The impact on $Y_i$ of altering a single individuals assignment $z_i=0 \to z_i=1$ while holding all other assigments fixed.
+* Indirect - The impact on $Y_i$ of altering the assignment of all other individuals $\{z_j\}_{j\neq i}$ of a group while holding $z_i$ fixed.
+* Total - A combination of direct and indirect effects.
+
+With this variety of quatities the proceed to derive unbiased estimators for the ATEs.
+[State corollary of theorem 2]
+:::
+
+
+
+
+
+papers [@Hudgens2008Causal], [@Aronow2017Estimating], [@Ugander2013Graph], [@Eckles2017Design]

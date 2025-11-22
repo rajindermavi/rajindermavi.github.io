@@ -1,6 +1,6 @@
 ---
 title: "About"
-image: construction.png
+image: /_assets/construction.png
 about:
   template: jolla
   links:

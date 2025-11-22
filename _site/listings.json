@@ -2,13 +2,15 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/blog/causal_inference_with_interference/index.html",
       "/blog/welcome/index.html"
     ]
   },
   {
     "listing": "/portfolio.html",
     "items": [
-      "/portfolio/welcome/index.html"
+      "/portfolio/welcome/index.html",
+      "/portfolio/linkedin-messaging-feature/index.html"
     ]
   }
 ]

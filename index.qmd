@@ -1,8 +1,8 @@
 ---
 title: "Rajinder Mavi, PhD"
-#image: construction.png
+#image: /_assets/construction.png
 ---
 
 Welcome!
 
-![Under Construction](construction.png){ .header-image}
+![Under Construction](/_assets/construction.png){ .header-image}

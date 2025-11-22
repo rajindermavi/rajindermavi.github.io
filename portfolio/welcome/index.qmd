@@ -3,6 +3,7 @@ title: "Welcome To My Portfolio"
 # author: "Rajinder Mavi"
 date: "2025-11-01"
 categories: [News]
+draft: true
 ---
 
 This is the first article in my portfolio. Welcome!

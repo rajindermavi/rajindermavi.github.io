@@ -1,10 +1,10 @@
 ---
 title: "LinkedIn Messaging Feature Proposal"
 author: "Rajinder Mavi"
-date: "2025-06-15"
+date: "2025-12-01"
 categories: [Data Science]
 image: "LinkedInGraph.png"
-draft: true
+draft: false
 ---
 
 ![](LinkedInGraph.png){ .header-image width=25% }
@@ -23,7 +23,7 @@ Essentially, the idea is to insert a field where a user can privately add a shor
 Typically rolling out a new feature on any social networking site requires collecting metrics to demonstrate it's impact and utility for users. In this article we will run through this vetting process.
 
 
-LinkedIn has a robust A/B testing methodology developed over years as the world's leading professional networking site. This [2015 article](https://content.linkedin.com/content/dam/engineering/site-assets/pdfs/ABTestingSocialNetwork_share.pdf) [@Xu2015infrastructure] details early scaling solutions. And [this](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i) [@LinkedInTRexI] [pair](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment) [@LinkedInTRexII] of 2020 bog posts lay out their mature infrastructure and methodology for A/B testing, called LinkedIn Targeting, Ramping, and Experimentation platform, or T-REX. All this preparation yields impressive scaling capabilities, supporting 2,000 new experiments per week (as of the 2020 post).
+LinkedIn has a robust A/B testing methodology developed over years as the world's leading professional networking site. This [2015 article](https://content.linkedin.com/content/dam/engineering/site-assets/pdfs/ABTestingSocialNetwork_share.pdf) [@Xu2015Infrastructure] details early scaling solutions. And [this](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/our-evolution-towards-t-rex-the-prehistory-of-experimentation-i) [@LinkedInTRexI] [pair](https://www.linkedin.com/blog/engineering/ab-testing-experimentation/a-b-testing-variant-assignment) [@LinkedInTRexII] of 2020 bog posts lay out their mature infrastructure and methodology for A/B testing, called LinkedIn Targeting, Ramping, and Experimentation platform, or T-REX. All this preparation yields impressive scaling capabilities, supporting 2,000 new experiments per week (as of the 2020 post).
 
 ## Testing Considerations
 

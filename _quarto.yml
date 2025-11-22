@@ -20,10 +20,10 @@ website:
         href: https://github.com/rajindermavi
       #- icon: twitter
       #  href: https://twitter.com
-  page-footer:
-    left: |
-      Having trouble? Try the backup site at 
-      <a href="https://rajindermavi.github.io" target="_blank">https://rajindermavi.github.io</a>
+#  page-footer:
+#    left: |
+#      Having trouble? Try the backup site at 
+#      <a href="https://rajindermavi.github.io" target="_blank">https://rajindermavi.github.io</a>
 format:
   html:
     theme:
@@ -31,13 +31,15 @@ format:
       - brand
     css: styles.css
     include-in-header: _includes/head.html
+    math:
+      auto_number: true
 
 
 execute:
   freeze: auto
 
 bibliography:
-  - biblio/ab_testing.bib
+  - biblio/causal_inference.bib
   - biblio/general.bib
   - biblio/math.bib
   - biblio/ml.bib
