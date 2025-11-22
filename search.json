@@ -21,13 +21,6 @@
     "text": "Welcome To My Portfolio\n\n\n\nNews\n\n\n\n\n\n\n\n\n\nNov 1, 2025\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "includes/estimator_HT.html",
-    "href": "includes/estimator_HT.html",
-    "title": "Mavi, PhD",
-    "section": "",
-    "text": "Let $ = {1,2,…,N} $ be a finite population. For each \\(i\\in\\mathcal{K}\\), let \\(Y_i\\) be an observable of unit \\(i\\). Our goal is to estimate \\[\nY = \\sum_{i=1}^N Y_i\n\\] the total of interest. And \\[\n\\tau = \\frac{1}{N}  \\sum_{i=1}^N Y_i\n\\] the average of the population.\nTo construct the estimator we take a random sample of \\(n&lt; N\\) units from \\(\\mathcal{K}\\). Any sampling method is allowed, but the obtained sample must have distinct units. Let \\(\\pi_i\\) be the probability the \\(i^{th}\\) unit is included in the sample (assume \\(\\pi_i &gt; 0\\)). Denote the random sample by \\(\\bf{S} = \\{i_1,...,i_n\\} \\subset \\mathcal{S}\\). The Horvitz Thompson esimator is \\[\n\\hat Y_{HT} = \\sum_{i\\in \\bf{S}} \\frac{Y_i}{\\pi_i} = \\sum_{i=1}^N \\frac{Y_i 1_{\\{i\\in \\bf S\\}}}{\\pi_i}\n\\] and \\[\n\\hat \\tau_{HT} = \\frac{1}{N} \\hat Y_{HT}\n\\]\nThe estimator is unbiased \\[\n    \\mathbb{E}[\\hat Y_{HT}] = Y.\n\\] \\[\n    \\mathbb{E}[\\hat \\tau_{HT}] = \\tau.\n\\]\nTo state the variance of \\(\\hat Y_{HT}\\), define \\(\\pi_{ij}\\) as the probability that both \\(i\\) and \\(j\\) belong to \\(\\bf{S}\\). The variance of Horvitz Thompson is then \\[\nVar(\\hat Y_{HT})\n    =\n        \\sum_{i=1}^N \\sum_{j=1}^{N} \\frac{\\pi_{ij} - \\pi_i\\pi_j}{\\pi_i\\pi_j} Y_i Y_j\n\\] it follows from the definition that \\(\\pi_{ii}\\) = \\(\\pi_i\\). The variance of tha average estimator is \\[\nVar(\\hat \\tau_{HT})\n    =\n        \\frac{1}{N^2}\\sum_{i=1}^N \\sum_{j=1}^{N} \\frac{\\pi_{ij} - \\pi_i\\pi_j}{\\pi_i\\pi_j} Y_i Y_j\n\\]\nAs we want to assure that the Horwitz Thompson estimator converges well to the quantity of interest, controlling the variance is key. It is not hard to see the variance has an upper bound, \\[\nVar(\\hat Y_{HT}) \\leq \\sum_{i,j=1}^N \\left(\\frac{1}{\\pi_i^{1/2}\\pi_j^{1/2}} - 1\\right) Y_i Y_j\n\\] but if some of the \\(\\pi_i\\) are small this raises the small denominator problem. So care would have to be taken in this case. This danger can be mollified through a modification of the HTE, the Hajek estimator. (Also note that as the sample becomes larger, the \\(\\pi_i\\) become larger, better controlling the variance.)\nExample\nConsider a collection of cities with populations greater than some lower bound \\(b\\) in some state. Let the cities be enumerated by \\(\\mathcal{K} =  \\{1,2,..,N\\}\\). Let \\(Y_i\\) be the total number of hotels in the ith city.\nSample \\(n\\) units from \\(\\mathcal{K}\\) by Simple Random Sampling Without Replacement. The inclusion probabilities are \\[\n\\pi_i = n/N\n\\] \\[\n\\pi_{ij} = \\frac{n(n-1)}{N(N-1)}\n\\]\nThe estimate of the average number of hotels in large cities would be given by \\(\\hat Y_{HT}\\) after sampling \\[\n\\hat Y_{HT} = \\sum_{i\\in \\bf{S}} \\frac{Y_i}{\\pi_i}\n= \\frac{N}{n}\\sum_{i\\in \\bf{S}} Y_i\n\\] with variance \\[\nVar(\\hat Y_{HT}) = N^2 \\frac{1 - n/N}{n} S^2\n\\] where \\(S^2\\) is the population variance. The variance does not tend to zero even as m tends to infinity. But, for the Horwitz Thompson average, \\[\nVar(\\hat \\tau_{HT}) = \\frac{1 - n/N}{n} S^2\n\\] Making a simple assumption \\(n \\propto N^\\alpha\\) for \\(0 &lt; \\alpha &lt; 1\\) or \\(n = \\beta N\\) for \\(0 &lt; \\beta &lt; 1\\), the variance of the estimator of the average tends to zero."
-  },
-  {
     "objectID": "blog.html",
     "href": "blog.html",
     "title": "Mavi, PhD",
@@ -40,13 +33,6 @@
     "title": "Rajinder Mavi, PhD",
     "section": "",
     "text": "Welcome!\n\n\n\nUnder Construction"
-  },
-  {
-    "objectID": "includes/estimator.html",
-    "href": "includes/estimator.html",
-    "title": "Mavi, PhD",
-    "section": "",
-    "text": "In the language of statistics, an esimator is a formula or rule employed to estimate a quantity of interest based on observed data. An estimator is said to be unbiased if it’s expectation is equal to the quantity of interest.\nFamiliar examples include the Expectation and Variance estimators for a set of observations \\((X_1,..,X_n)\\) of a random variable \\(X\\) with mean \\(\\mu\\) and variance \\(\\sigma^2\\).\nExpectation Estimator\n\\[\n\\bar X_n = \\frac{1}{n} \\sum_{i=1}^n X_i\n\\] The estimator is unbiased since \\[\n\\mathbb{E} [\\bar X_n] = \\mu\n\\]\nIt is useful to find (or at least bound above) the variance of the estimator, since that guarantees a good estimate if it can be shown to be small. The variance is \\[\nVar(\\bar X_n)  = \\mathbb{E}[(\\bar X_n - \\mathbb{E}[\\bar X_n])^2] = \\frac{1}{n}\\sigma^2\n\\] so the variance tends to zero with a large sample, assuring a quality estimator that is unbiased and converges to the quantity of interest.\nVariance Estimator\n\\[\nS_n^2 = \\frac{1}{n-1}\\sum_{i=1}^n (X_i - \\bar X_n)^2\n\\] \\[\n\\mathbb{E} [S_n^2] = \\sigma^2\n\\]\nThe variance is somewhat more complicated, \\[\nVar(S^2_n) = \\frac1n \\left( \\mathbb{E}[(X - \\mu)^4] -\\frac{n-3}{n-1}\\sigma^4 \\right)\n\\] nevertheless still tends to zero with a large sample.\nNote we did not use the estimator \\[\n\\tilde S_n^2 = \\frac{1}{n-1}\\sum_{i=1}^n (X_i - \\bar X_n)^2\n\\] as this woule have expectation \\[\n\\mathbb{E} [\\tilde S_n^2] = \\frac{n}{n-1}\\sigma^2\n\\] and would be a biased estimator."
   },
   {
     "objectID": "about.html",
