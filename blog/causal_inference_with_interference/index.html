@@ -212,9 +212,12 @@ window.Quarto = {
 
 
 
-<p>In a causal experiment we would like to measure the impact of a treatment on a quantity of interest. To fix ideas, suppose we have a social media site and are considering an update on the messaging function. The goal might be to increase user messaging frequency or even to improve the quality of messages as measured by the overall length of each message. In the classical sense, there is no way to practically isolate users in a way that would satisfy the SUTVA assumption, hence the need to update the theoretical foundations causal experiments are based upon.</p>
-<p>Classic causal testing typically relies on an assumption of no interference between individuals (for example, the SUTVA framework). With the no-interference assumption, the outcomes of each individual are unaffected by the treatment of each other individual.</p>
-<p>Social media created a need for causal testing theory and methods that flips that assumptions and conversely handles the case of dense interactions between individuals. From the perspective of the classical theory there would be no guarantee such methodolody would exist, which makes the discoveries of the early social media days a remarkable story.</p>
+<p>Lately I’ve been exploring research in causal inference. The last 15 years have been a remarkable journey in the topic of causal inference with interference. With the advent of large scale social media platforms there has been enormous interest in understanding causal inference in an environment that permits interactions spanning the entire population under consideration.</p>
+<p>The goal of causal inference is to understand the causal relationship between an independent and dependent variable. Fundamentally, we would like to understand the impact on the dependent variable <span class="math inline">\(Y_i\)</span> for each individual with a change in the independent variable <span class="math inline">\(z = 0,1\)</span>. Mathematically, this is quantified by the Average Treatment Effect <span id="eq-ate-sutva"><span class="math display">\[
+\tau(1,0) = \frac1N\sum_{i=1}^N \left(Y_i(1) - Y_i(0) \right)
+\tag{1}\]</span></span> where the difference <span class="math inline">\(Y_i(1) - Y_i(0)\)</span> represents the change in the dependent variable due to the indepedent variable for the <span class="math inline">\(i^{th}\)</span> unit. The fundamental problem of causal inference is that one can only observe a unit’s response under a single treatment. That is, we can measure <span class="math inline">\(Y_i(1)\)</span> or <span class="math inline">\(Y_i(0)\)</span>, but not both. This issue is mitigated in experiments with random assignments of individuals to the control or treatment group. The framework of Stable Unit Treatment Value Assumption (SUTVA) requires no cross dependence across unit treatments and is the primary historical method for estimation of a single, consistent treatment effect on the dependent variable.</p>
+<p>The problem of interference within and accross assigment groups of course must immediately be considered unless individuals are completely isolated from one another. Classical approaches to control the interference typically rely on asserting groups of interacting individuals, but no interference between groups. In that case the assignment consideration is taken at a group level <span class="citation" data-cites="Hudgens2008Causal">(<a href="#ref-Hudgens2008Causal" role="doc-biblioref">Hudgens and Halloran 2008</a>)</span>.</p>
+<p>In a massively connected component of individuals, there is no hope of assignments of noninteracting groups. Thus interference within the group itself must be controlled. There is an exiting story of the formulation of cluster methods to recover results on treatment effect, that is, the existence of estimators of (<a href="#eq-ate-sutva" class="quarto-xref">Equation&nbsp;1</a>), and controlling their bias and variance.</p>
 <p>Background for this note includes the following …</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Estimator">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -313,17 +316,57 @@ Var(\hat \tau_{HT}) = \frac{1 - n/N}{n} S^2
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Basic Graph theory">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Basic Graph theory
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<section id="graph-theory-basics" class="level2 callout-body-container callout-body">
+<h2 class="anchored" data-anchor-id="graph-theory-basics">Graph Theory Basics</h2>
+<p>A graph is defined as a pair <span class="math inline">\(G = (V, E)\)</span> where <span class="math inline">\(V\)</span> is a finite set of vertices and <span class="math inline">\(E \subseteq \{\{u,v\} : u, v \in V, u \neq v\}\)</span> is a set of unordered edges.</p>
+<ul>
+<li><strong>Vertices and edges:</strong> Each element <span class="math inline">\(v \in V\)</span> is a vertex. An edge <span class="math inline">\(\{u,v\} \in E\)</span> connects two distinct vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>.</li>
+<li><strong>Adjacency:</strong> Two vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are adjacent if <span class="math inline">\(\{u,v\} \in E\)</span>.</li>
+<li><strong>Degree:</strong> The degree of a vertex <span class="math inline">\(v\)</span> is <span class="math inline">\(\deg(v) = |\{u \in V : \{u,v\} \in E\}|\)</span>.</li>
+</ul>
+<section id="neighborhoods" class="level3">
+<h3 class="anchored" data-anchor-id="neighborhoods">Neighborhoods</h3>
+<p>The (open) neighborhood of a vertex <span class="math inline">\(v\)</span> is <span class="math display">\[
+N(v) = \{u \in V : \{u,v\} \in E\}.
+\]</span> Including the vertex itself yields the closed neighborhood <span class="math inline">\(N[v] = N(v) \cup \{v\}\)</span>.</p>
+</section>
+<section id="balls-in-a-graph" class="level3">
+<h3 class="anchored" data-anchor-id="balls-in-a-graph">Balls in a Graph</h3>
+<p>Using graph distance <span class="math inline">\(d_G(u,v)\)</span> (the length of a shortest path between <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span>), the ball of radius <span class="math inline">\(r \ge 0\)</span> around <span class="math inline">\(v\)</span> is <span class="math display">\[
+B_r(v) = \{u \in V : d_G(u,v) \le r\}.
+\]</span> When <span class="math inline">\(r = 1\)</span>, <span class="math inline">\(B_1(v) = N[v]\)</span>.</p>
+</section>
+<section id="annular-regions" class="level3">
+<h3 class="anchored" data-anchor-id="annular-regions">Annular Regions</h3>
+<p>An annulus (discrete ring) around <span class="math inline">\(v\)</span> between radii <span class="math inline">\(r_1\)</span> and <span class="math inline">\(r_2\)</span> with <span class="math inline">\(0 \le r_1 &lt; r_2\)</span> is <span class="math display">\[
+A_{r_1,r_2}(v) = \{u \in V : r_1 &lt; d_G(u,v) \le r_2\}.
+\]</span> These layers let us analyze how structure or influence spreads outward from a vertex.</p>
+</section>
+</section>
+</div>
+</div>
 <p>Enumerate the users <span class="math inline">\(\mathcal{V} = \{v_1,v_2,...,v_N\}\)</span>. Typically, the network is modeled as a graph <span class="math inline">\(\mathcal{G} = (\mathcal{V},\mathcal{E})\)</span>. In our example two units may be connected by an edge if they are freinds. For the sake of the experiment, each user is assigned to one of two groups <span class="math inline">\(z_i = 0,1\)</span>, with <span class="math inline">\(0\)</span> being the control and <span class="math inline">\(1\)</span> being the treatment.</p>
 <p>With an assignment of <span class="math inline">\(z = (z_1,z_2,..,z_N)\)</span> the total of the quantity of interest is <span class="math display">\[
 Y(z) = \sum_{i=1}^N Y_i(z)
 \]</span> where <span class="math inline">\(Y_i\)</span> is the quantity of interest for the <span class="math inline">\(i^{th}\)</span> individual. For our messaging example, <span class="math inline">\(Y_i\)</span> might be the total number of messages the user sent within a two week period. Notice at this point we are allowing that each individual’s behavior depends on the entire assignment vector!</p>
 <p>The ulimate goal is to estimate <span id="eq-ate"><span class="math display">\[
 \tau(\vec{1},\vec{0}) = \frac1N\sum_{i=1}^N \left(Y_i(\vec{1}) - Y_i(\vec{0}) \right)
-\tag{1}\]</span></span> the Average Treatment Effect (ATE). Here <span class="math inline">\(\vec{1}\)</span> (<span class="math inline">\(\vec{0}\)</span>) is the assignment of <span class="math inline">\(1\)</span>s (<span class="math inline">\(0\)</span>s) to all individuals. Of course there is no world where we can simultaneously assign all units both 1 and 0, hence the goal of our study.</p>
+\tag{2}\]</span></span> the Average Treatment Effect (ATE). Here <span class="math inline">\(\vec{1}\)</span> (<span class="math inline">\(\vec{0}\)</span>) is the assignment of <span class="math inline">\(1\)</span>s (<span class="math inline">\(0\)</span>s) to all individuals. Of course there is no world where we can simultaneously assign all units both 1 and 0, hence the goal of our study.</p>
 <p>It would be hard to make it very far without making some kind of assumptions on the network effects. How can we make conclusions about <span class="math inline">\(\tau(\vec{1},\vec{0})\)</span> if we can’t isolate the assignment groups? The earliest paper I found in this direction is <span class="citation" data-cites="Ugander2013Graph">(<a href="#ref-Ugander2013Graph" role="doc-biblioref">Ugander et al. 2013</a>)</span>. The authors make the assumption of a <strong><em>net exposure condition</em></strong> which effectively assumes that if sufficiently many agents of an individuals neighborhood belong to a given assignment group, the individual will behave as if the entire network has that assignment. That is, for indivual <span class="math inline">\(v\in\mathcal{V}\)</span>, suppose there are <span class="math inline">\(k_i\)</span> individuals in <span class="math inline">\(A_{1,r}(v)\)</span> assigned <span class="math inline">\(z_j = 1 (0)\)</span>, then we can assume <span class="math inline">\(i\)</span> behaves as if <span class="math inline">\(z = \vec{1} (\vec{0})\)</span>. Explicit choices of <span class="math inline">\(k_i\)</span> can vary, but the authors consider <span class="math inline">\(k_i\)</span> the size of the neighborhood <span class="math inline">\(k_i = |A_{1,r}(v)|\)</span>, or a proportion of the neighborhood <span class="math inline">\(k_i = \kappa |A_{1,r}(v)|\)</span>, or simply a constant minimum over the network <span class="math inline">\(k_i = \kappa\)</span>.</p>
 <p>The Ugander paper is notable because they tackle the problem of a globally connected network of individuals. Compare this to the more mature literature of estimating the ATE when there are groups of interacting agents <span class="citation" data-cites="Hudgens2008Causal">(<a href="#ref-Hudgens2008Causal" role="doc-biblioref">Hudgens and Halloran 2008</a>)</span>. In that paper, the population is stratified into groups, and interference is limited to individuals among the same group. For example, a group might be all students in a particular elementary school. The analogy of the net exposure condition, is the assumption that any two assignments of a fixed group are equivalent if they have the same number of individuals assigned to 1 and 0 respectively.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Hudgens and Halloran, 2008">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -332,9 +375,9 @@ Y(z) = \sum_{i=1}^N Y_i(z)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The Hudgens and Halloran paper outlines detailed experiment designs. [Sampling proceedures] The goal is to measure quantities like (<a href="#eq-ate" class="quarto-xref">Equation&nbsp;1</a>) by group and by individual. They differentiate a number of different causal effects * Direct - The impact on <span class="math inline">\(Y_i\)</span> of altering a single individuals assignment <span class="math inline">\(z_i=0 \to z_i=1\)</span> while holding all other assigments fixed. * Indirect - The impact on <span class="math inline">\(Y_i\)</span> of altering the assignment of all other individuals <span class="math inline">\(\{z_j\}_{j\neq i}\)</span> of a group while holding <span class="math inline">\(z_i\)</span> fixed. * Total - A combination of direct and indirect effects.</p>
+<p>The Hudgens and Halloran paper outlines detailed experiment designs. [Sampling proceedures] The goal is to measure quantities like (<a href="#eq-ate" class="quarto-xref">Equation&nbsp;2</a>) by group and by individual. They differentiate a number of different causal effects * Direct - The impact on <span class="math inline">\(Y_i\)</span> of altering a single individuals assignment <span class="math inline">\(z_i=0 \to z_i=1\)</span> while holding all other assigments fixed. * Indirect - The impact on <span class="math inline">\(Y_i\)</span> of altering the assignment of all other individuals <span class="math inline">\(\{z_j\}_{j\neq i}\)</span> of a group while holding <span class="math inline">\(z_i\)</span> fixed. * Total - A combination of direct and indirect effects.</p>
 <p>With this variety of quatities the proceed to derive unbiased estimators for the ATEs. [State corollary of theorem 2]</p>
 </div>
 </div>
