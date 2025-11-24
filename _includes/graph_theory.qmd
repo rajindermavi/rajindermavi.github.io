@@ -1,0 +1,31 @@
+## Graph Theory Basics
+
+A graph is defined as a pair $G = (V, E)$ where $V$ is a finite set of vertices and $E \subseteq \{\{u,v\} : u, v \in V, u \neq v\}$ is a set of unordered edges.
+
+- **Vertices and edges:** Each element $v \in V$ is a vertex. An edge $\{u,v\} \in E$ connects two distinct vertices $u$ and $v$.
+- **Adjacency:** Two vertices $u$ and $v$ are adjacent if $\{u,v\} \in E$.
+- **Degree:** The degree of a vertex $v$ is $\deg(v) = |\{u \in V : \{u,v\} \in E\}|$.
+
+### Neighborhoods
+
+The (open) neighborhood of a vertex $v$ is
+$$
+N(v) = \{u \in V : \{u,v\} \in E\}.
+$$
+Including the vertex itself yields the closed neighborhood $N[v] = N(v) \cup \{v\}$.
+
+### Balls in a Graph
+
+Using graph distance $d_G(u,v)$ (the length of a shortest path between $u$ and $v$), the ball of radius $r \ge 0$ around $v$ is
+$$
+B_r(v) = \{u \in V : d_G(u,v) \le r\}.
+$$
+When $r = 1$, $B_1(v) = N[v]$.
+
+### Annular Regions
+
+An annulus (discrete ring) around $v$ between radii $r_1$ and $r_2$ with $0 \le r_1 < r_2$ is
+$$
+A_{r_1,r_2}(v) = \{u \in V : r_1 < d_G(u,v) \le r_2\}.
+$$
+These layers let us analyze how structure or influence spreads outward from a vertex.

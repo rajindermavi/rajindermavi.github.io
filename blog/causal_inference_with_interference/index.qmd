@@ -7,29 +7,43 @@ image: /_assets/construction.png
 draft: false
 ---
 
-
-In a causal experiment we would like to measure 
-the impact of a treatment on a quantity of interest.
-To fix ideas, suppose we have a social media site and are considering 
-an update on the messaging function. 
-The goal might be to increase user messaging frequency or even to 
-improve the quality of messages as measured by the overall length of each message.
-In the classical sense, there is no way to practically isolate users
-in a way that would satisfy the SUTVA assumption, 
-hence the need to update the theoretical foundations causal experiments are based upon. 
+Lately I've been exploring research in causal inference.
+The last 15 years have been a remarkable journey in the topic of causal inference with interference. 
+With the advent of large scale social media platforms there has been enormous interest
+in understanding causal inference in an environment that permits interactions
+spanning the entire population under consideration.
 
 
-Classic causal testing typically relies on an assumption of 
-no interference between individuals (for example, the SUTVA framework).
-With the no-interference assumption, the outcomes of each
-individual are unaffected by the treatment of each other individual.
+The goal of causal inference is to understand the causal 
+relationship between an independent and dependent variable.
+Fundamentally, we would like to understand the impact on the dependent variable $Y_i$ for each individual
+with a change in the independent variable $z = 0,1$.
+Mathematically, this is quantified by the Average Treatment Effect
+$$
+\tau(1,0) = \frac1N\sum_{i=1}^N \left(Y_i(1) - Y_i(0) \right)
+$$ {#eq-ate-sutva}
+where the difference $Y_i(1) - Y_i(0)$ represents the change in the dependent variable 
+due to the indepedent variable for the $i^{th}$ unit.
+The fundamental problem of causal inference is that one can only observe a unit’s response under a single treatment. 
+That is, we can measure $Y_i(1)$ or $Y_i(0)$, but not both.
+This issue is mitigated in experiments with random assignments of individuals to the control or treatment group.
+The framework of Stable Unit Treatment Value Assumption (SUTVA) requires no cross dependence across unit treatments
+and is the primary historical method for estimation of a single, consistent treatment effect on the dependent variable.
 
 
-Social media created a need for causal testing theory and methods that flips that assumptions
-and conversely handles the case of dense interactions between individuals.
-From the perspective of the classical theory there would be no guarantee such methodolody 
-would exist, which makes the discoveries of the early social media days a
-remarkable story.
+The problem of interference within and accross assigment groups of course must immediately be considered unless 
+individuals are completely isolated from one another.
+Classical approaches to control the interference typically rely on asserting groups of interacting individuals,
+but no interference between groups. In that case the assignment consideration is taken at a group level [@Hudgens2008Causal].
+
+
+In a massively connected component of individuals, there is no hope of assignments of noninteracting groups. 
+Thus interference within the group itself must be controlled.
+There is an exiting story of the formulation of cluster methods to recover results on treatment effect,
+that is, the existence of estimators of (@eq-ate-sutva), and controlling their bias and variance.
+
+
+
 
 
 Background for this note includes the following ...
@@ -40,6 +54,10 @@ Background for this note includes the following ...
 
 ::: {.callout-note title="Horvitz Thompson Estimator" collapse="true"}
 {{< include /_includes/estimator_HT.qmd >}}
+:::
+
+::: {.callout-note title="Basic Graph theory" collapse="true"}
+{{< include /_includes/graph_theory.qmd >}}
 :::
 
 
