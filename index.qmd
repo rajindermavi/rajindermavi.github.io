@@ -3,6 +3,8 @@ title: "Rajinder Mavi, PhD"
 #image: /_assets/construction.png
 ---
 
-Welcome!
 
-![Under Construction](/_assets/construction.png){ .header-image}
+
+
+![Under Construction](/_assets/construction.png){ width=40% fig-align="center"}
+

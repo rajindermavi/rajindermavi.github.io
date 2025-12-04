@@ -2,8 +2,9 @@
 title: "LinkedIn Messaging Feature Proposal"
 author: "Rajinder Mavi"
 date: "2025-12-01"
-categories: [Data Science]
+categories: [Data Science, Causal Inference]
 image: "LinkedInGraph.png"
+description: "Proposal for A/B testing a feature in a social network"
 draft: false
 ---
 

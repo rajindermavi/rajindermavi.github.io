@@ -2,11 +2,11 @@
 #title: "Rajinder Mavi, PhD"
 listing:
   contents: portfolio
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
+  type: grid
+  sort: false
+  categories: false
+  fields: [image,title,description]
+  #image-align: center
 page-layout: full
 title-block-banner: true
 ---

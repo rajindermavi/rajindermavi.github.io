@@ -56,5 +56,11 @@
   "blog/causal_inference_with_interference/index.qmd": {
     "index.html": "7728e3fa",
     "index.tex": "1bc94d78"
+  },
+  "portfolio/invoice-mailer/index.qmd": {
+    "index.html": "9f025fad"
+  },
+  "portfolio/swe-consulting/index.qmd": {
+    "index.html": "68653887"
   }
 }

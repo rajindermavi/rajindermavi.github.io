@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "Rajinder Mavi, PhD",
     "section": "",
-    "text": "Welcome!\n\n\n\nUnder Construction"
+    "text": "Under Construction"
   },
   {
     "objectID": "blog.html",
@@ -32,7 +32,7 @@
     "href": "portfolio.html",
     "title": "Mavi, PhD",
     "section": "",
-    "text": "LinkedIn Messaging Feature Proposal\n\n\n\nData Science\n\n\n\n\n\n\n\n\n\nDec 1, 2025\n\n\nRajinder Mavi\n\n\n\n\n\nNo matching items"
+    "text": "LinkedIn Messaging Feature Proposal\n\n\nProposal for A/B testing a feature in a social network\n\n\n\n\n\n\n\n\n\n\n\n\nCreating consumer oriented applications\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "portfolio/linkedin-messaging-feature/index.html",
@@ -68,5 +68,26 @@
     "title": "Causal Inference With Interference",
     "section": "Graph Theory Basics",
     "text": "Graph Theory Basics\nA graph is defined as a pair \\(G = (V, E)\\) where \\(V\\) is a finite set of vertices and \\(E \\subseteq \\{\\{u,v\\} : u, v \\in V, u \\neq v\\}\\) is a set of unordered edges.\n\nVertices and edges: Each element \\(v \\in V\\) is a vertex. An edge \\(\\{u,v\\} \\in E\\) connects two distinct vertices \\(u\\) and \\(v\\).\nAdjacency: Two vertices \\(u\\) and \\(v\\) are adjacent if \\(\\{u,v\\} \\in E\\).\nDegree: The degree of a vertex \\(v\\) is \\(\\deg(v) = |\\{u \\in V : \\{u,v\\} \\in E\\}|\\).\n\n\nNeighborhoods\nThe (open) neighborhood of a vertex \\(v\\) is \\[\nN(v) = \\{u \\in V : \\{u,v\\} \\in E\\}.\n\\] Including the vertex itself yields the closed neighborhood \\(N[v] = N(v) \\cup \\{v\\}\\).\n\n\nBalls in a Graph\nUsing graph distance \\(d_G(u,v)\\) (the length of a shortest path between \\(u\\) and \\(v\\)), the ball of radius \\(r \\ge 0\\) around \\(v\\) is \\[\nB_r(v) = \\{u \\in V : d_G(u,v) \\le r\\}.\n\\] When \\(r = 1\\), \\(B_1(v) = N[v]\\).\n\n\nAnnular Regions\nAn annulus (discrete ring) around \\(v\\) between radii \\(r_1\\) and \\(r_2\\) with \\(0 \\le r_1 &lt; r_2\\) is \\[\nA_{r_1,r_2}(v) = \\{u \\in V : r_1 &lt; d_G(u,v) \\le r_2\\}.\n\\] These layers let us analyze how structure or influence spreads outward from a vertex."
+  },
+  {
+    "objectID": "portfolio/swe-consulting/index.html",
+    "href": "portfolio/swe-consulting/index.html",
+    "title": "Creating consumer oriented applications",
+    "section": "",
+    "text": "I focus on building solutions that meet real user needs and fit naturally into existing business processes. With experience in data analysis and modeling, I prioritize practicality over complexity—creating tools people can actually use. I collaborate closely with clients to understand their workflows, communicate clearly, and develop systems that support both their goals and the way they work."
+  },
+  {
+    "objectID": "portfolio/swe-consulting/index.html#business-intelligence",
+    "href": "portfolio/swe-consulting/index.html#business-intelligence",
+    "title": "Creating consumer oriented applications",
+    "section": "Business Intelligence",
+    "text": "Business Intelligence"
+  },
+  {
+    "objectID": "portfolio/swe-consulting/index.html#building-a-stand-alone-invoice-mailer",
+    "href": "portfolio/swe-consulting/index.html#building-a-stand-alone-invoice-mailer",
+    "title": "Creating consumer oriented applications",
+    "section": "Building a stand alone Invoice Mailer",
+    "text": "Building a stand alone Invoice Mailer\n\nWhy it exists: Finance teams were manually hunting invoices/Statements of Account across shared folders, zipping them, and pasting boilerplate emails. The app turns that ritual into a guided workflow with guardrails: pick a billing period, validate matches, preview zips, and send (or safely dry-run) in one place. UX shape: A Tkinter desktop app with tabs that mirror the real-world flow—Settings → Email Settings → Scan → Zip → Send & Logs—so users always know what’s next. Mode is loud and color-coded (red Active vs blue Test) to prevent accidental real sends. Core pipeline: Settings: Users point to invoice/SOA folders, the client list (Excel/CSV), and an optional zip output folder. SMTP is captured once, with TLS on by default. Email setup: Subject/body templates, sender name, reporter emails, and the target month/year live here. Reporter emails receive run summaries. Scan: We ingest the client list into SQLite, regex-match invoice/soa filenames, and parse invoice/SOA dates from PDFs with PyMuPDF plus optional OCR fallback. A change report highlights added/removed records so operators see what changed before sending. Zip: Each head office gets a per-client zip with its invoices plus the matching SOA. The preview table is your preflight check. Send: Builds EmailMessage objects, attaches the zips, and sends via SMTP. Test mode skips the network and produces a full “would send” activity log; Active mode sends and optionally mails a run report to auditors. Engineering choices: Local SQLite cache (backend/db/db.py): Fast, embeddable, and easy to rebuild. Every run snapshots the old DB, rebuilds from disk, reports diffs, and cleans up the backup to keep state honest. File/date extraction (backend/config.py, backend/utility/extract_pdf_text.py): Regex-driven filename patterns keep parsing explicit. PDF regions are configurable percent boxes; OCR fallback covers scanned PDFs. Dates normalize to ISO so month/year filtering stays deterministic. Packaging emails (backend/utility/email.py): Templated subjects/bodies with {month}/{year} tokens; zips attached per client; reporter emails receive the activity log. SMTP TLS and AUTH are enforced when available, and dry-run mode keeps testing network-free. Secure settings (SecureConfig): Config is encrypted at rest. On Windows bundles we prefer DPAPI; elsewhere we fall back to a Fernet key stored alongside the encrypted config. Credentials aren’t left in plain text. Resilience: Missing matches simply skip sending for that client; invalid paths raise early; threaded send keeps the UI responsive; progress bar + log pane make long runs observable. Developer ergonomics: A local SMTP debug server script plus dry-run logging makes it safe to iterate without touching production mail. Config/regex defaults live in code but are easy to adjust. Value to users: Eliminates manual file hunting, zipping, and emailing; one run covers the whole billing period. Reduces mistakes: enforced month/year selection, preview tables, and bright mode banners make it hard to send the wrong files or send for real by accident. Auditable runs: change reports and reporter emails capture what was sent (or would have been sent) for compliance. Faster onboarding: Desktop UI with saved settings means anyone on the team can execute the process without shell skills."
   }
 ]

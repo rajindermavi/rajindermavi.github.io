@@ -79,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-image','listing-title','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -187,7 +187,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVuY2U=">Data Science <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q2F1c2FsJTIwSW5mZXJlbmNl">Causal Inference <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGF0YSUyMFNjaWVuY2U=">Data Science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RGV2ZWxvcG1lbnQ=">Development <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -199,37 +199,39 @@ window.Quarto = {
 
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="RGF0YSUyMFNjaWVuY2U=" data-listing-date-sort="1764576000000" data-listing-file-modified-sort="1763807608295" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="915">
-<div class="thumbnail"><a href="./portfolio/linkedin-messaging-feature/index.html" class="no-external">
-
-<img loading="lazy" src="./portfolio/linkedin-messaging-feature/LinkedInGraph.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./portfolio/linkedin-messaging-feature/index.html" class="no-external">LinkedIn Messaging Feature Proposal</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('RGF0YSUyMFNjaWVuY2U='); return false;">Data Science</div>
-
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-categories="RGF0YSUyMFNjaWVuY2UlMkNDYXVzYWwlMjBJbmZlcmVuY2U=" data-listing-date-sort="1764576000000" data-listing-file-modified-sort="1764658282024" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="915">
+<a href="./portfolio/linkedin-messaging-feature/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./portfolio/linkedin-messaging-feature/LinkedInGraph.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+LinkedIn Messaging Feature Proposal
+</h5>
+<div class="card-text listing-description delink">
+<p>Proposal for A/B testing a feature in a social network</p>
 </div>
-<div class="delink listing-description"><a href="./portfolio/linkedin-messaging-feature/index.html" class="no-external">
-Let’s talk about A/B testing.
-</a></div>
 </div>
-<div class="metadata">
-<a href="./portfolio/linkedin-messaging-feature/index.html" class="no-external">
-<div class="listing-date">
-Dec 1, 2025
+</div></a>
 </div>
-<div class="listing-author">
-Rajinder Mavi
+<div class="g-col-1" data-index="1" data-categories="RGV2ZWxvcG1lbnQ=" data-listing-date-sort="1764576000000" data-listing-file-modified-sort="1764730328513" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="538">
+<a href="./portfolio/swe-consulting/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top">
+<img loading="lazy" src="./portfolio/swe-consulting/swe_data_consulting.png" class="thumbnail-image card-img" style="height: 150px;">
+</p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Creating consumer oriented applications
+</h5>
+<div class="card-text listing-description delink">
+I focus on building solutions that meet real user needs and fit naturally into existing business processes. With experience in data analysis and modeling, I prioritize…
 </div>
-</a>
 </div>
+</div></a>
 </div>
 </div>
 <div class="listing-no-matching d-none">No matching items</div>
