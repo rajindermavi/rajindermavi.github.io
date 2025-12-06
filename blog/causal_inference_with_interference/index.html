@@ -220,7 +220,7 @@ window.Quarto = {
 <p>In a massively connected component of individuals, there is no hope of assignments of noninteracting groups. Thus interference within the group itself must be controlled. There is an exiting story of the formulation of cluster methods to recover results on treatment effect, that is, the existence of estimators of (<a href="#eq-ate-sutva" class="quarto-xref">Equation&nbsp;1</a>), and controlling their bias and variance.</p>
 <p>Background for this note includes the following …</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Estimator">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -229,7 +229,7 @@ window.Quarto = {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>In the language of statistics, an esimator is a formula or rule employed to estimate a quantity of interest based on observed data. An estimator is said to be unbiased if it’s expectation is equal to the quantity of interest.</p>
 <p>Familiar examples include the Expectation and Variance estimators for a set of observations <span class="math inline">\((X_1,..,X_n)\)</span> of a random variable <span class="math inline">\(X\)</span> with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
@@ -260,7 +260,7 @@ Var(S^2_n) = \frac1n \left( \mathbb{E}[(X - \mu)^4] -\frac{n-3}{n-1}\sigma^4 \ri
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Horvitz Thompson Estimator">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -269,7 +269,7 @@ Var(S^2_n) = \frac1n \left( \mathbb{E}[(X - \mu)^4] -\frac{n-3}{n-1}\sigma^4 \ri
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>Let $ = {1,2,…,N} $ be a finite population. For each <span class="math inline">\(i\in\mathcal{K}\)</span>, let <span class="math inline">\(Y_i\)</span> be an observable of unit <span class="math inline">\(i\)</span>. Our goal is to estimate <span class="math display">\[
 Y = \sum_{i=1}^N Y_i
@@ -317,7 +317,7 @@ Var(\hat \tau_{HT}) = \frac{1 - n/N}{n} S^2
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Basic Graph theory">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -326,7 +326,7 @@ Var(\hat \tau_{HT}) = \frac{1 - n/N}{n} S^2
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
 <section id="graph-theory-basics" class="level2 callout-body-container callout-body">
 <h2 class="anchored" data-anchor-id="graph-theory-basics">Graph Theory Basics</h2>
 <p>A graph is defined as a pair <span class="math inline">\(G = (V, E)\)</span> where <span class="math inline">\(V\)</span> is a finite set of vertices and <span class="math inline">\(E \subseteq \{\{u,v\} : u, v \in V, u \neq v\}\)</span> is a set of unordered edges.</p>
@@ -366,7 +366,7 @@ Y(z) = \sum_{i=1}^N Y_i(z)
 <p>It would be hard to make it very far without making some kind of assumptions on the network effects. How can we make conclusions about <span class="math inline">\(\tau(\vec{1},\vec{0})\)</span> if we can’t isolate the assignment groups? The earliest paper I found in this direction is <span class="citation" data-cites="Ugander2013Graph">(<a href="#ref-Ugander2013Graph" role="doc-biblioref">Ugander et al. 2013</a>)</span>. The authors make the assumption of a <strong><em>net exposure condition</em></strong> which effectively assumes that if sufficiently many agents of an individuals neighborhood belong to a given assignment group, the individual will behave as if the entire network has that assignment. That is, for indivual <span class="math inline">\(v\in\mathcal{V}\)</span>, suppose there are <span class="math inline">\(k_i\)</span> individuals in <span class="math inline">\(A_{1,r}(v)\)</span> assigned <span class="math inline">\(z_j = 1 (0)\)</span>, then we can assume <span class="math inline">\(i\)</span> behaves as if <span class="math inline">\(z = \vec{1} (\vec{0})\)</span>. Explicit choices of <span class="math inline">\(k_i\)</span> can vary, but the authors consider <span class="math inline">\(k_i\)</span> the size of the neighborhood <span class="math inline">\(k_i = |A_{1,r}(v)|\)</span>, or a proportion of the neighborhood <span class="math inline">\(k_i = \kappa |A_{1,r}(v)|\)</span>, or simply a constant minimum over the network <span class="math inline">\(k_i = \kappa\)</span>.</p>
 <p>The Ugander paper is notable because they tackle the problem of a globally connected network of individuals. Compare this to the more mature literature of estimating the ATE when there are groups of interacting agents <span class="citation" data-cites="Hudgens2008Causal">(<a href="#ref-Hudgens2008Causal" role="doc-biblioref">Hudgens and Halloran 2008</a>)</span>. In that paper, the population is stratified into groups, and interference is limited to individuals among the same group. For example, a group might be all students in a particular elementary school. The analogy of the net exposure condition, is the assumption that any two assignments of a fixed group are equivalent if they have the same number of individuals assigned to 1 and 0 respectively.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Hudgens and Halloran, 2008">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -375,7 +375,7 @@ Y(z) = \sum_{i=1}^N Y_i(z)
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
 <p>The Hudgens and Halloran paper outlines detailed experiment designs. [Sampling proceedures] The goal is to measure quantities like (<a href="#eq-ate" class="quarto-xref">Equation&nbsp;2</a>) by group and by individual. They differentiate a number of different causal effects * Direct - The impact on <span class="math inline">\(Y_i\)</span> of altering a single individuals assignment <span class="math inline">\(z_i=0 \to z_i=1\)</span> while holding all other assigments fixed. * Indirect - The impact on <span class="math inline">\(Y_i\)</span> of altering the assignment of all other individuals <span class="math inline">\(\{z_j\}_{j\neq i}\)</span> of a group while holding <span class="math inline">\(z_i\)</span> fixed. * Total - A combination of direct and indirect effects.</p>
 <p>With this variety of quatities the proceed to derive unbiased estimators for the ATEs. [State corollary of theorem 2]</p>
