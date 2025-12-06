@@ -1,7 +1,7 @@
 ---
 title: "Creating consumer oriented applications"
 # author: "Rajinder Mavi"
-date: "2025-12-01"
+# date: "2025-12-01"
 image: swe_data_consulting.png
 categories: [Development]
 description: Design consumer-grade tools from your data that feel effortless to use and fit right into how your team already works.
@@ -26,26 +26,32 @@ the right mix of automation and craft—while grounded in a responsible, profess
 --->
 
 
-## Building a stand alone Invoice Mailer
+## Invoice Mailer
+[github repo](https://github.com/rajindermavi/InvoiceMailer)
+
+**Why it exists**: Finance teams were manually hunting invoices/Statements of Account across shared folders, zipping them, and pasting boilerplate emails. The app turns that ritual into a guided workflow with guardrails: pick a billing period, validate matches, preview zips, and send (or safely dry-run) in one place.
 
 
-Why it exists: Finance teams were manually hunting invoices/Statements of Account across shared folders, zipping them, and pasting boilerplate emails. The app turns that ritual into a guided workflow with guardrails: pick a billing period, validate matches, preview zips, and send (or safely dry-run) in one place.
-UX shape: A Tkinter desktop app with tabs that mirror the real-world flow—Settings → Email Settings → Scan → Zip → Send & Logs—so users always know what’s next. Mode is loud and color-coded (red Active vs blue Test) to prevent accidental real sends.
-Core pipeline:
-Settings: Users point to invoice/SOA folders, the client list (Excel/CSV), and an optional zip output folder. SMTP is captured once, with TLS on by default.
-Email setup: Subject/body templates, sender name, reporter emails, and the target month/year live here. Reporter emails receive run summaries.
-Scan: We ingest the client list into SQLite, regex-match invoice/soa filenames, and parse invoice/SOA dates from PDFs with PyMuPDF plus optional OCR fallback. A change report highlights added/removed records so operators see what changed before sending.
-Zip: Each head office gets a per-client zip with its invoices plus the matching SOA. The preview table is your preflight check.
-Send: Builds EmailMessage objects, attaches the zips, and sends via SMTP. Test mode skips the network and produces a full “would send” activity log; Active mode sends and optionally mails a run report to auditors.
-Engineering choices:
-Local SQLite cache (backend/db/db.py): Fast, embeddable, and easy to rebuild. Every run snapshots the old DB, rebuilds from disk, reports diffs, and cleans up the backup to keep state honest.
-File/date extraction (backend/config.py, backend/utility/extract_pdf_text.py): Regex-driven filename patterns keep parsing explicit. PDF regions are configurable percent boxes; OCR fallback covers scanned PDFs. Dates normalize to ISO so month/year filtering stays deterministic.
-Packaging emails (backend/utility/email.py): Templated subjects/bodies with {month}/{year} tokens; zips attached per client; reporter emails receive the activity log. SMTP TLS and AUTH are enforced when available, and dry-run mode keeps testing network-free.
-Secure settings (SecureConfig): Config is encrypted at rest. On Windows bundles we prefer DPAPI; elsewhere we fall back to a Fernet key stored alongside the encrypted config. Credentials aren’t left in plain text.
-Resilience: Missing matches simply skip sending for that client; invalid paths raise early; threaded send keeps the UI responsive; progress bar + log pane make long runs observable.
-Developer ergonomics: A local SMTP debug server script plus dry-run logging makes it safe to iterate without touching production mail. Config/regex defaults live in code but are easy to adjust.
-Value to users:
-Eliminates manual file hunting, zipping, and emailing; one run covers the whole billing period.
-Reduces mistakes: enforced month/year selection, preview tables, and bright mode banners make it hard to send the wrong files or send for real by accident.
-Auditable runs: change reports and reporter emails capture what was sent (or would have been sent) for compliance.
-Faster onboarding: Desktop UI with saved settings means anyone on the team can execute the process without shell skills.
+**UX shape**: A Tkinter desktop app with tabs that mirror the real-world flow—Settings → Email Settings → Scan → Zip → Send & Logs—so users always know what’s next. Mode is loud and color-coded (red Active vs blue Test) to prevent accidental real sends.
+
+
+### Core pipeline:
+**Settings**: Users point to invoice/SOA folders, the client list (Excel/CSV), and an optional zip output folder. SMTP is captured once, with TLS on by default.\
+**Email setup**: Subject/body templates, sender name, reporter emails, and the target month/year live here. Reporter emails receive run summaries.\
+**Scan**: We ingest the client list into SQLite, regex-match invoice/soa filenames, and parse invoice/SOA dates from PDFs with PyMuPDF plus optional OCR fallback. A change report highlights added/removed records so operators see what changed before sending.\
+**Zip**: Each head office gets a per-client zip with its invoices plus the matching SOA. The preview table is your preflight check.\
+**Send**: Builds EmailMessage objects, attaches the zips, and sends via SMTP. Test mode skips the network and produces a full “would send” activity log; Active mode sends and optionally mails a run report to auditors.\
+
+### Engineering choices:
+**Local SQLite cache (backend/db/db.py)**: Fast, embeddable, and easy to rebuild. Every run snapshots the old DB, rebuilds from disk, reports diffs, and cleans up the backup to keep state honest.\
+**File/date extraction (backend/config.py, backend/utility/extract_pdf_text.py)**: Regex-driven filename patterns keep parsing explicit. PDF regions are configurable percent boxes; OCR fallback covers scanned PDFs. Dates normalize to ISO so month/year filtering stays deterministic.\
+**Packaging emails (backend/utility/email.py)**: Templated subjects/bodies with {month}/{year} tokens; zips attached per client; reporter emails receive the activity log. SMTP TLS and AUTH are enforced when available, and dry-run mode keeps testing network-free.\
+**Secure settings (SecureConfig)**: Config is encrypted at rest. On Windows bundles we prefer DPAPI; elsewhere we fall back to a Fernet key stored alongside the encrypted config. Credentials aren’t left in plain text.\
+**Resilience**: Missing matches simply skip sending for that client; invalid paths raise early; threaded send keeps the UI responsive; progress bar + log pane make long runs observable.\
+**Developer ergonomics**: A local SMTP debug server script plus dry-run logging makes it safe to iterate without touching production mail. Config/regex defaults live in code but are easy to adjust.\
+
+### Value to users:
+**Eliminates manual file hunting, zipping, and emailing**: one run covers the whole billing period.\
+**Reduces mistakes**: enforced month/year selection, preview tables, and bright mode banners make it hard to send the wrong files or send for real by accident.\
+**Auditable runs**: change reports and reporter emails capture what was sent (or would have been sent) for compliance.\
+**Faster onboarding**: Desktop UI with saved settings means anyone on the team can execute the process without shell skills.\
