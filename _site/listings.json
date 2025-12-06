@@ -2,10 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/blog/causal_inference_with_interference/index.html",
-      "/blog/bert/index.html",
-      "/blog/welcome/index.html",
-      "/blog/hofstadter-butterfly/index.html"
+      "/blog/causal_inference_with_interference/index.html"
     ]
   },
   {

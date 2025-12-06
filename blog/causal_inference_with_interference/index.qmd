@@ -48,15 +48,15 @@ that is, the existence of estimators of (@eq-ate-sutva), and controlling their b
 
 Background for this note includes the following ...
 
-::: {.callout-note title="Estimator" collapse="true"}
+::: {.callout-note title="Estimator" collapse="false"}
 {{< include /_includes/estimator.qmd >}}
 :::
 
-::: {.callout-note title="Horvitz Thompson Estimator" collapse="true"}
+::: {.callout-note title="Horvitz Thompson Estimator" collapse="false"}
 {{< include /_includes/estimator_HT.qmd >}}
 :::
 
-::: {.callout-note title="Basic Graph theory" collapse="true"}
+::: {.callout-note title="Basic Graph theory" collapse="false"}
 {{< include /_includes/graph_theory.qmd >}}
 :::
 
@@ -114,7 +114,7 @@ For example, a group might be all students in a particular elementary school.
 The analogy of the net exposure condition, is the assumption that any two assignments of a fixed group
 are equivalent if they have the same number of individuals assigned to 1 and 0 respectively.
 
-::: {.callout-note title="Hudgens and Halloran, 2008" collapse="true"}
+::: {.callout-note title="Hudgens and Halloran, 2008" collapse="false"}
 The Hudgens and Halloran paper outlines detailed experiment designs.
 [Sampling proceedures]
 The goal is to measure quantities like (@eq-ate) by group and by individual.
