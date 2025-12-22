@@ -4,7 +4,10 @@ title: "Causal Inference With Interference"
 date: "2025-12-01"
 categories: [AB Testing, Data Science, Statistics, Academic]
 image: /_assets/construction.png
-draft: false
+draft: true
+header-includes:
+  - \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+  - \usepackage{float}
 ---
 
 Lately I've been exploring research in causal inference.
@@ -16,14 +19,14 @@ spanning an entire population.
 
 The goal of causal inference is to understand the causal 
 relationship between an explanatory and response variable.
-Fundamentally, we would like to understand the impact on the reponse variable $Y_i$ for each individual
+Fundamentally, we would like to understand the impact on the response variable $Y_i$ for each individual
 with a change in the explanatory variable $z = 0,1$.
 Mathematically, this is quantified by the Average Treatment Effect
 $$
 \tau(1,0) = \frac1N\sum_{i=1}^N \left(Y_i(1) - Y_i(0) \right)
 $$ {#eq-ate-sutva}
 where the difference $Y_i(1) - Y_i(0)$ represents the change in the dependent variable 
-due to the indepedent variable for the $i^{th}$ unit.
+due to the independent variable for the $i^{th}$ unit.
 The fundamental problem of causal inference is that one can only observe a unit’s response under a single treatment. 
 That is, we can measure $Y_i(1)$ or $Y_i(0)$, but not both.
 This issue is mitigated in experiments with random assignments of individuals to the control or treatment group.
@@ -31,14 +34,14 @@ The framework of Stable Unit Treatment Value Assumption (SUTVA) requires no cros
 and is historically the primary method for estimation of a single, consistent treatment effect on the response variable.
 
 
-The problem of interference within and accross assigment groups of course must immediately be considered unless 
+The problem of interference within and across assignment groups of course must immediately be considered unless 
 individuals are completely isolated from one another.
-One example of a classical approach to measure interference asserts individuals are permittedto interact within groups,
+One example of a classical approach to measure interference asserts individuals are permitted to interact within groups,
 but not between groups. In that case the assignment consideration is taken at a group level [@Hudgens2008Causal].
 
 
 In a massively connected component of individuals, characteristic  of social networks,
-there is no hope of assignments to noninteracting groups. 
+there is no hope of assignments to non-interacting groups. 
 Thus interference within the group itself must be controlled.
 There is an exiting story of the formulation of cluster methods to recover results on treatment effect,
 that is, the existence of estimators of (@eq-ate-sutva), and controlling their bias and variance.
@@ -61,16 +64,60 @@ Background for this note includes the following ...
 {{< include /_includes/graph_theory.qmd >}}
 :::
 
+Before heading into the main content, I want to take a minute to look at the state-of-the-art prior
+to causal inference with interference without network considerations. 
+As you will see, methods of this type would have no hope of deriving statistical inference in the case of a social network
+without ignoring fundamental limitations of the classical methods.
 
+::: {.callout-note title="Hudgens and Halloran, 2008" collapse="false"}
+The Hudgens and Halloran paper outlines detailed experimental designs.
+
+Instead of a single globally connected component of individuals, 
+the population is partitioned into M groups. 
+The goal is to compare preparations $\phi$ and $\psi$. 
+Each cluster is assigned a preparation $\phi$ or $\psi$ which forms the
+basis for comparing the response $Y$. 
+For example $\phi$ might represent two-thirds of individuals being assigned $Z = 1$ 
+and $\psi$ represent one-third of individuals assigned $Z = 1$.
+
+The authors analyze the preparations in a number of different ways, of which we will focus on just one.
+The ***individual average direct causal effect*** for individual $j$ in group  $i$,
+$\overline{CE}^D{ij}(\psi)$ is the average (with respect to $\psi$) 
+impact on $Y_{ij}$ of altering a single individuals assignment  $z_i=0 \to z_i=1$ while holding all other assignments fixed.
+Letting $\hat Y_{(i)}(z;\psi)$ to be the average measurement among group $i$ members assigned $Z_{ij}=z$, we have
+$$
+\hat{CE}^D_{(i)}(\psi) = \hat Y_i(0;\psi) - \hat Y_i(1;\psi) 
+$$
+is an unbiased estimator of the individual average direct causal effect.
+The authors derive similar results for population level direct, indirect, and total effects. 
+
+These results all hold without making any assumptions on the structure of interaction within the groups.
+To get any farther, they must make a stratified invariance assumption.  IE if $\sum_j z_{ij} =\sum_j z'_{ij}$
+and for some $j$, $z_{ij} = z'_{ij} $ then $Y_{ij}(z) = Y_{ij}(z')$. 
+With this assumption in hand the authors are able to find unbiased estimators for the variance of 
+$\hat{CE}^D_{(i)}(\psi)$ and the other quantities of interest.
+Moreover, under appropriate scaling of the group and population sizes, these estimators of the variance vanish in the  limit.
+
+:::
+
+As you saw above, the local conditions of an individual is controlled up to an assignment policy $\phi,\psi$. 
+We made no assumptions of the conditions within the group for estimators of the mean.
+We only made the assumption of invariance within the 
+group - up to any preparation with a fixed number of treated individuals being constant - in order to study the estimators for the variance.
+The structure supporting the next step forward is provided by the language of graph theory as you we get in to now.
+
+
+## Preliminaries
 
 
 Enumerate the individuals $\mathcal{V} = \{v_1,v_2,...,v_N\}$.
-Typically, the network is modeled as a graph $\mathcal{G} = (\mathcal{V},\mathcal{E})$.
+The network is modeled as a graph $\mathcal{G} = (\mathcal{V},\mathcal{E})$.
 For example, two units may be connected by an edge if they are friends, mutual follows, or interact frequently. 
 For the sake of the experiment, each user is assigned to one of two groups $z_i = 0,1$, 
 with $0$ being the control and $1$ being the treatment.
 
 
+The assignment into the control or treatment group is a random variable $Z$ taking values in $\{0,1\}^N$.
 With an assignment of $z = (z_1,z_2,..,z_N)$ the total of the quantity of interest is 
 $$
 Y(z) = \sum_{i=1}^N Y_i(z)
@@ -82,7 +129,7 @@ Notice at this point we are allowing that each individual's behavior depends on 
 entire assignment vector!
 
 
-The ulimate goal is to estimate
+The ultimate goal is to estimate
 $$
 \tau(\vec{1},\vec{0}) = \frac1N\sum_{i=1}^N \left(Y_i(\vec{1}) - Y_i(\vec{0}) \right)
 $$ {#eq-ate}
@@ -91,63 +138,59 @@ Here $\vec{1}$ ($\vec{0}$) is the assignment of $1$s ($0$s) to all individuals.
 Of course there is no world where we can simultaneously assign all units both 1 and 0,
 hence the goal of our study.
 
-
-It would be hard to make much progress without making some kind of assumptions on the network effects.
-How can we make conclusions about $\tau(\vec{1},\vec{0})$ if we can't isolate the assignment groups?
-The earliest paper I found in this direction is [@Ugander2013Graph].
-The authors make the assumption of a ***net exposure condition*** which 
-effectively assumes that if sufficiently many agents of an individuals neighborhood belong
-to a given assignment group, the individual will behave as if the entire network 
-has that assignment.
-That is, for indivual $v\in\mathcal{V}$, suppose there are $k_i$ individuals in $A_{1,r}(v)$ assigned $z_j = 1 (0)$, 
-then we can assume $i$ behaves as if $z = \vec{1} (\vec{0})$. 
-Explicit choices of $k_i$ can vary, but the authors consider $k_i$ 
-the size of the neighborhood $k_i = |A_{1,r}(v)|$, 
-or a proportion of the neighborhood $k_i = \kappa |A_{1,r}(v)|$,
-or simply a constant minimum over the network $k_i = \kappa$.
-
-The Ugander paper is notable because they tackle the problem of a globally connected network of individuals.
-Compare this to the more mature literature of estimating the ATE 
-when there are groups of interacting agents [@Hudgens2008Causal].
-In that paper, the population is stratified into groups, 
-and interference is limited to individuals among the same group.
-For example, a group might be all students in a particular elementary school.
-The analogy of the net exposure condition, is the assumption that any two assignments of a fixed group
-are equivalent if they have the same number of individuals assigned to 1 and 0 respectively.
+So what takes the place of non interacting groups in the world of network inference? 
+The analogy of assignment policies $\phi,\psi$ is the concept of ***local exposure conditions***.
+These may vary by setup, but essentially a local exposure condition
+$\sigma_i^x$, for $x=0,1$, is the set of all assignments $z$ such that individual $v_i$ behaves as 
+if the entire network is in state $z = \vec x$.
 
 
-::: {.callout-note title="Hudgens and Halloran, 2008" collapse="false"}
-The Hudgens and Halloran paper outlines detailed experimental designs.
+These local exposure conditions were introduced in [@Ugander2013Graph]:
 
-Instead of a single globally connected component of individuals, 
-the population is partitioned into M groups. 
-The goal is to compare preparations $\phi$ and $\psi$. 
-Each cluster is assigned a preparation $\phi$ or $\psi$ which forms the
-basis for comparing the response $Y$. 
-For example $\phi$ might represent two-thirds of individuals being assigned $Z = 1$ 
-and $\psi$ represen one-third of individuals assigned $Z = 1$.
+* Full neighborhood exposure: $\sigma_i^x$ contains all assignments such that $z_j=x$ for $v_i$ and all their neighbors.
+* Absolute k-neighborhood exposure: $\sigma_i^x$ contains all assignments such that $z_i=x$ and $z_j = x$ for at least $k$ neighbors of $v_i$.
+* Fractional q-neighborhood exposure: if $v_i$ has degree $d$ then $\sigma_i^x$ 
+contains all assignments such that $z_i=x$ and $z_j = x$ for at least $qd$ neighbors of $v_i$.
 
-The authors analyse the preparations in a number of different ways, of which we will focus on just one.
-The ***individual average direct causal effect*** for individual $j$ in group  $i$,
-$\overline{CE}^D{ij}(\psi)$ is the average (with respect to $\psi$) 
-impact on $Y_{ij}$ of altering a single individuals assignment  $z_i=0 \to z_i=1$ while holding all other assigments fixed.
-Letting $\hat Y_{(i)}(z;\psi)$ to be the average measurement among group $i$ members assigned $Z_{ij}=z$, we have
+There is no hard limit to the different local exposure conditions, 
+one might take stricter or looser interpretations of these conditions if need be.
+
+Analysis will center on the Horvitz-Thompson estimator for the assignment effect,
 $$
-\hat{CE}^D_{(i)}(\psi) = \hat Y_i(0;\psi) - \hat Y_i(1;\psi) 
+    \hat Y^x_{HT} = \frac1N\sum_{i} \frac{Y_i(Z) \bf 1_{[Z \in \sigma_i^x ]} }{Pr(Z\in\sigma_i^x)}
+$${#eq-ht-effect}
+By the standard theory, the 
 $$
-is an unbiased estimator of the individual average direct causal effect.
-The authors derive similar results for populatio level direct, indirect, and total effects. 
+    \hat \tau_{HT} = \hat Y^1_{HT} - \hat Y^0_{HT} 
+$$
+is an unbiased estimator of $\tau(\vec 1, \vec 0)$.
 
-These results all hold without making any assumptions on the structure of interaction within the groups.
-To get any farther, they must make a sratified invariance assumption.  IE if $\sum_j z_{ij} =\sum_j z'_{ij}$
-and for some $j$, $z_{ij} = z'_{ij} $ then $Y_{ij}(z) = Y_{ij}(z')$. 
-With this assumption in hand the authors are able to find unbiased estimators for the variance of 
-$\hat{CE}^D_{(i)}(\psi)$ and the other quantities of interest.
-Moreover, under appropriate scalings of the group and population sizes, these estimators of the variance vanish in the  limit.
-
-:::
+If the $Z_i$ are i.i.d., (referred to as ***arbitrary exposure*** in [@Aronow2017Estimating]), 
+and $\sigma_i^x$ is defined as the full neighborhood exposure, with $v_i$ having degree $d$,
+then $Pr(Z\in\sigma_i^x|Z_i = x) = \frac1{2^d}$. 
+Thus, for large degree, you are up against a small denominator problem which will lead to large variance of the estimators.
+The graph cluster randomization algorithm is designed to mitigate this problem.
 
 
+## Graph Cluster Randomization
 
 
-papers [@Hudgens2008Causal], [@Aronow2017Estimating], [@Ugander2013Graph], [@Eckles2017Design]
+This paper [@Ugander2013Graph] suggests a simple graph cluster algorithm which forms the basis for addressing the arbitrary exposure issue. 
+The algorithm forms the basis of making probabilities of  $\{Z \in \sigma_i^x\}$ more tractable for the sake of estimator convergence.
+
+#### Algorithm
+
+* Initially all vertices are unmarked
+* Let $\mathcal{U} \subset \mathcal{V}$ be the set of unmarked vertices
+* Set the cluster counter to 0, $s=0$
+* Loop while there remain unmarked vertices:
+    - Select an arbitrary vertex $v\in\mathcal{U}$.
+    - Mark all vertices in $B_{2}(v)\cap\mathcal{U}$ as cluster $C_s$.
+    - Remove the new cluster from unmarked vertices, $\mathcal{U} \to \mathcal{U}\setminus C_s$.
+    - Increment $s$ by 1, $s\to s+1$.
+* For any vertex $v$, let $C(v)$ be the cluster containing $v$.
+
+
+
+
+papers  [@Eckles2017Design]

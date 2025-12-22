@@ -1,9 +1,7 @@
 [
   {
     "listing": "/blog.html",
-    "items": [
-      "/blog/causal_inference_with_interference/index.html"
-    ]
+    "items": []
   },
   {
     "listing": "/portfolio.html",
