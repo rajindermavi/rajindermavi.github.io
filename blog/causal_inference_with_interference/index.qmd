@@ -33,17 +33,16 @@ This issue is mitigated in experiments with random assignments of individuals to
 The framework of Stable Unit Treatment Value Assumption (SUTVA) requires no cross dependence across unit treatments
 and is historically the primary method for estimation of a single, consistent treatment effect on the response variable.
 
-
-The problem of interference within and across assignment groups of course must immediately be considered unless 
-individuals are completely isolated from one another.
-One example of a classical approach to measure interference asserts individuals are permitted to interact within groups,
-but not between groups. In that case the assignment consideration is taken at a group level [@Hudgens2008Causal].
-
+In moving towards the study of interacting individuals, first studies focused at collections of groups. 
+Here, interaction is permitted within groups, but not between groups [@Hudgens2008Causal].
+Again the fundamental issue, that  we can measure one of two assignment strategies, but not both,
+is mitigated by random assignments at the group level.
 
 In a massively connected component of individuals, characteristic  of social networks,
-there is no hope of assignments to non-interacting groups. 
-Thus interference within the group itself must be controlled.
-There is an exiting story of the formulation of cluster methods to recover results on treatment effect,
+there is apriori no framework for non interacting assignments.
+Now we face the issue that we are permitted only a single assignment for the entire cluster.
+The  interference within the group itself must be controlled.
+There is an exciting story of the formulation of cluster methods to recover results on treatment effect,
 that is, the existence of estimators of (@eq-ate-sutva), and controlling their bias and variance.
 
 
@@ -162,13 +161,19 @@ $${#eq-ht-effect}
 By the standard theory, the 
 $$
     \hat \tau_{HT} = \hat Y^1_{HT} - \hat Y^0_{HT} 
-$$
+$${#eq-ht-ate}
 is an unbiased estimator of $\tau(\vec 1, \vec 0)$.
 
 If the $Z_i$ are i.i.d., (referred to as ***arbitrary exposure*** in [@Aronow2017Estimating]), 
 and $\sigma_i^x$ is defined as the full neighborhood exposure, with $v_i$ having degree $d$,
 then $Pr(Z\in\sigma_i^x|Z_i = x) = \frac1{2^d}$. 
 Thus, for large degree, you are up against a small denominator problem which will lead to large variance of the estimators.
+Indeed [@Ugander2013Graph] show that for a degree $d$ graph there is a lower bound on the variance of
+(@eq-ht-ate) for full neighborhood exposure
+$$
+    var(\hat\tau_{HT}) > O(\frac1N (p^{-d}) + (1-p)^{-d})
+$$
+notice the exponential lower bound in $d$.
 The graph cluster randomization algorithm is designed to mitigate this problem.
 
 
@@ -189,6 +194,34 @@ The algorithm forms the basis of making probabilities of  $\{Z \in \sigma_i^x\}$
     - Remove the new cluster from unmarked vertices, $\mathcal{U} \to \mathcal{U}\setminus C_s$.
     - Increment $s$ by 1, $s\to s+1$.
 * For any vertex $v$, let $C(v)$ be the cluster containing $v$.
+:::{.theorem}
+Now, with the assumption of a limited growth condition,
+$$
+    |B_r(v)| < \kappa^{r-1}|B_1(v)|.
+$$
+and making random assignments at the cluster level, we obtain an upper bound linear
+$$
+    var(\hat \tau_{HT}()) \leq O(frac1N \kappa^5 (d+1)(p^{-2\kappa^3-1} + (1-p)^{-2\kappa^3-1})).
+$$
+:::
+You can see in the above we are moving from a lower bound exponential in d to linear in d, 
+with the addition of an exponential bound in $\kappa^3$. 
+Indeed measurements of real world social networks show not an exponetial bound on neighborhood growth but polynomial,
+so concievably the $\kappa^3$ might be much smaller than the initial degree $d$. 
+It would be possible to carry out this analysis for graphs with randome degree as well, presumably gaining much better upper bounds. 
+
+So how does the Graph Cluster Algorithm help us? Well initially if we are randomly making assignments by individual,
+$$
+ P(\sigma_i^1) = p^{-d-1} 
+$$
+But with assignments at the graph cluster level, and the  key observation that the
+number of clusters any $B_1(v)$ may intersect is bounded by $\kappa^3$,
+$$
+ P(\sigma_i^1) \geq p^{\kappa^}. 
+$$
+Looking back at the formula of the variance for the Horvitz Thompson estimator we
+quoted above you can see how controlling the lower bound of the $P(\sigma_i^1)$ (which is exactly $\pi_i$)
+helps to control the upper bound of the variance.
 
 
 
