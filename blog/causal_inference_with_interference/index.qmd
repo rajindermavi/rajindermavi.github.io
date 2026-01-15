@@ -16,6 +16,11 @@ With the advent of large scale social media platforms there has been enormous in
 in understanding causal inference in an environment that permits interactions
 spanning an entire population.
 
+### Origin of causal inference
+
+### Early 2000s state of the art
+
+### General Concept
 
 The goal of causal inference is to understand the causal 
 relationship between an explanatory and response variable.
@@ -170,21 +175,6 @@ Here $\vec{1}$ ($\vec{0}$) is the assignment of $1$s ($0$s) to all individuals.
 Of course there is no world where we can simultaneously assign all units both 1 and 0,
 hence the goal of our study.
 
-## Some Formalism
-
-For concreteness it is useful to make the stochastic element explicit.
-Let the outcomes vector $Y = (Y_i)_{i=1}^N$ take values in the space $\mathbb{Y}^N$
-and the assignments vector $Z = (Z_i)_{i=1}^N$ take values in $\mathbb{Z}^N$. 
-The stochastic component $U$ takes values in $\mathbb{U}^N$.
-The behavior of individual $v_i$ is determined by a function
-$$
-f_i:\mathbb{Z}^N \times \mathbb{U}^N \to \mathbb{Y}
-$$ 
-The full response vector is then explicitly a function of the assignments and stochastic component: 
-$$
-Y = f(Z,U).
-$$
-
 ## Generalizing Assignment Policies
 
 *So what takes the place of non interacting groups in the world of network inference?*
@@ -296,17 +286,33 @@ The Eckles paper [@Eckles2017Design] contributes
 
 ### Linear example
 
+For a given design $d$, define the individual treatment response as
+$$
+\mu^d_{ITR}(z) = \sum_i \mathbb E^d [ Y_i |Z_i = z]
+$$
+and the corresponding ATE as $\tau_{ITR}^d = \mu_{ITR}^d(1) - \mu_{ITR}^d(0)$. 
+
 Suppose the expected response depends on the assignment linearly:
 IE there is a vector $a \in \mathbb{R}^N$ and matrix $B\in \mathbb{R}^{NxN}$ so that
 $$
-E_U[Y(z,U)] = a + Bz.
+E_U[Y_i(z,U)] = a_i + \sum_i B_{ij}z_j.
 $$
 Then 
 $$
-\tau(\vec 1,\vec 0) = \sum_{i,j} B_{i,j}.
+\mu_{ITR}^d(z) = \frac 1 N \sum_i (a_i + B_{ii}z_i) + \frac 1 N \sum_{i,j} B_{i,j}\mathbb E [Z_j|Z_i = z_i].
 $$
-Then we can find the ATE for different designs ...
+from which we have the ATE
+$$
+\tau_{ITR}^d(\vec 1,\vec 0) = 
+    \frac 1 N \sum_i B_{ii}\
+    +  
+    \frac 1 N \sum_{i,j} B_{i,j}\left( \mathbb E [Z_j|Z_i = 1] - \mathbb E [Z_j|Z_i = 0]\right).
+$$
+Then we can find the ATE for different designs. 
+Suppose the design $d = iid$ is arbitrary exposure, then  
+$$
 
+$$
 
 ## Aronow
 
