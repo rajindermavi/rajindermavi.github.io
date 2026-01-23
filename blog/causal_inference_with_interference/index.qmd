@@ -165,9 +165,9 @@ if the entire network is in state $z = \vec x$.
 There are various versions of this, but in particular, for ***full neighborhood exposure**
 $\sigma_i^x$ contains all assignments such that $z_j=x$ for $v_i$ and all their neighbors.
 
-Perhaps the most general version is introduced in [@Manski2013Identification] 
-by the name of ***effective treatments***. 
-Here we introduce a space $\mathbb{G}^N$, and functions $g_i: \mathbb{Z}^N \to \mathbb{G}_i$,
+Perhaps the most general version is introduced in [@Manski2013Identification] by the name of ***effective treatment***. 
+(An equivalent alternative version was introduced in [@Aronow2017Estimating] by the name of ***exposure mapping***). 
+Here we introduce a space $\Delta$, and functions $g_i: \mathbb{Z}^N \to \mathbb{G}_i$,
 the $g_i$ define the effective treatments, such that
 $$
 g_i(z) = g_i(z') \implies f_i(z,U) = f_i(z',U),
@@ -183,9 +183,6 @@ These local exposure conditions were introduced in [@Ugander2013Graph]:
 * Fractional q-neighborhood exposure: if $v_i$ has degree $d$ then $\sigma_i^x$ 
 contains all assignments such that $z_i=x$ and $z_j = x$ for at least $qd$ neighbors of $v_i$.
 -->
-
-There is no hard limit to the different local exposure conditions, 
-one might take stricter or looser interpretations of these conditions if need be.
 
 Analysis will center on the Horvitz-Thompson estimator for the assignment effect,
 $$
@@ -280,7 +277,7 @@ $$
 $$
 Then 
 $$
-\mu_{ITR}^d(z) = \frac 1 N \sum_i (a_i + B_{ii}z_i) + \frac 1 N \sum_{i,j} B_{i,j}\mathbb E [Z_j|Z_i = z_i].
+\mu_{g}^d(z) = \frac 1 N \sum_i (a_i + B_{ii}z_i) + \frac 1 N \sum_{i,j} B_{i,j}\mathbb E [Z_j|Z_i = z_i].
 $$
 from which we have the ATE
 $$
@@ -310,17 +307,55 @@ $$
 $$
 and comparing the result to [@eq-ate-gcr-linear] and [@eq-ate-iid-linear].
 
+
+<--!
+
+Now suppose we have two effective treatements $g^A,g^B$ such that, for any $z,z'$,
+$$
+g^A(z) = g^A(z') \implies g^B(z) = g^B(z')
+$$
+
+
+
+<--!
+Theorem 2.2, more restrictive g ....
+
 #### Computational Examples
 
 Discuss computational examples here.
-
+-->
 
 ## Sampling
 
+The paper [@Aronow2017Estimating] introduces a sampling methodology for simulating network experiments.
+Enumerate the codomain of the effective treatements $g_i$ as $\{d_1,d_2,...,d_K\}$.
+Let $i$ enumerate the vertices and $j$ enumerate all $\{0,1\}^N$. Define
+$$
+(I_k)_{ij} = I(g_i(z^{(j)}) = d_k)
+$$
+and 
+$$
+P = diag(P(Z = z^{(1)}),...,P(Z = z^{(2^N)}))
+$$
+Then 
+$$
+(I_kPI_\ell)_{ij} = P(g_i(z) = d_k;g_j(z) = d_\ell) 
+$$
+
+From this we have approximations, let $\hat I_k^{(R)}$ be 
+a sampling of $R$ from columns of $I_k$ according to the  probability $p_z = P(Z=z)$.
+Then
+$$
+\frac1{R+1}\left(\hat I_{R;k} \hat I_{R;\ell}' + \delta_{k\ell} \right)
+  \to^{as} \frac1{R+1}\left(\hat I_{R;k} \hat I_{R;\ell}' + \delta_{k\ell} \right)  \to^{as} 
+$$
+
+
 The Aronow paper [@Aronow2017Estimating].
-* Broader Exposure mapping framework.
 * Computational formalism
 * Sampling method for the HT estimator
 * Bound on the bias for the sampled HT estimator
 * Calculation for the variance of the sampled HT estimator with lower bound given positivity conditions.
-* 
+* 4
+
+-->
